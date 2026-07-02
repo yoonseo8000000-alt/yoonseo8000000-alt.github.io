@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>이어드림스쿨 on yoonseo blog</title>
+    <link>https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/</link>
+    <description>Recent content in 이어드림스쿨 on yoonseo blog</description>
+    <generator>Hugo</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2021 요소수 대란 데이터 분석: 인터렉티브 지도로 재고 위기 시각화하기</title>
+      <link>https://yoonseo8000000-alt.github.io/posts/2026-06-27-urea-project/</link>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/posts/2026-06-27-urea-project/</guid>
+      <description>&lt;h2 id=&#34;프로젝트-개요&#34;&gt;프로젝트 개요&lt;/h2&gt;
+&lt;p&gt;이어드림스쿨 6기 첫 팀 프로젝트. 2021년 한국에서 발생한 요소수 수급 위기를 데이터로 분석. 5인 팀으로 진행, 지역별 주유소 재고 현황을 한눈에 파악할 수 있는 인터렉티브 지도를 만드는 것이 목표.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;담당 역할&lt;/strong&gt;: 프로젝트 방향성 설정, AI 도구를 활용한 분석 전략 수립, 최종 발표자료(PPT) 제작&lt;/p&gt;
+&lt;h2 id=&#34;문제-정의&#34;&gt;문제 정의&lt;/h2&gt;
+&lt;p&gt;2021년 요소수 대란은 뉴스에서 &amp;ldquo;전국적으로 심각했다&amp;quot;고만 보도됐지만, 실제로 지역별 편차가 어느 정도였는지, 어떤 패턴이 있었는지는 명확히 드러나지 않았다. 이 프로젝트에서 답하고자 한 질문은 두 가지.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
