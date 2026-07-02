@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>yoonseo blog</title>
-    <link>https://yoonseo8000000-alt.github.io/</link>
-    <description>Recent content on yoonseo blog</description>
+    <title>수업정리 on yoonseo blog</title>
+    <link>https://yoonseo8000000-alt.github.io/tags/%EC%88%98%EC%97%85%EC%A0%95%EB%A6%AC/</link>
+    <description>Recent content in 수업정리 on yoonseo blog</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
     <lastBuildDate>Tue, 30 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://yoonseo8000000-alt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yoonseo8000000-alt.github.io/tags/%EC%88%98%EC%97%85%EC%A0%95%EB%A6%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지</title>
       <link>https://yoonseo8000000-alt.github.io/posts/2026-06-30-linear-algebra-basics/</link>
@@ -29,60 +29,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sent1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])   &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;I love machine learning&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sent2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])   &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;I love deep learning&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;이미지 → 행렬&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>2021 요소수 대란 데이터 분석: 인터렉티브 지도로 재고 위기 시각화하기</title>
-      <link>https://yoonseo8000000-alt.github.io/posts/2026-06-27-urea-project/</link>
-      <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/posts/2026-06-27-urea-project/</guid>
-      <description>&lt;h2 id=&#34;프로젝트-개요&#34;&gt;프로젝트 개요&lt;/h2&gt;
-&lt;p&gt;이어드림스쿨 6기 첫 팀 프로젝트. 2021년 한국에서 발생한 요소수 수급 위기를 데이터로 분석. 5인 팀으로 진행, 지역별 주유소 재고 현황을 한눈에 파악할 수 있는 인터렉티브 지도를 만드는 것이 목표.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;담당 역할&lt;/strong&gt;: 프로젝트 방향성 설정, AI 도구를 활용한 분석 전략 수립, 최종 발표자료(PPT) 제작&lt;/p&gt;
-&lt;h2 id=&#34;문제-정의&#34;&gt;문제 정의&lt;/h2&gt;
-&lt;p&gt;2021년 요소수 대란은 뉴스에서 &amp;ldquo;전국적으로 심각했다&amp;quot;고만 보도됐지만, 실제로 지역별 편차가 어느 정도였는지, 어떤 패턴이 있었는지는 명확히 드러나지 않았다. 이 프로젝트에서 답하고자 한 질문은 두 가지.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>내면 근력</title>
-      <link>https://yoonseo8000000-alt.github.io/bookbot/book3/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/bookbot/book3/</guid>
-      <description>&lt;p&gt;YES24 베스트셀러 책 추천: 내면 근력&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>사랑이 있으니 살아집디다</title>
-      <link>https://yoonseo8000000-alt.github.io/bookbot/book5/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/bookbot/book5/</guid>
-      <description>&lt;p&gt;YES24 베스트셀러 책 추천: 사랑이 있으니 살아집디다&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>사춘기 엄마의 오장육부</title>
-      <link>https://yoonseo8000000-alt.github.io/bookbot/book4/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/bookbot/book4/</guid>
-      <description>&lt;p&gt;YES24 베스트셀러 책 추천: 사춘기 엄마의 오장육부&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>첫 글</title>
-      <link>https://yoonseo8000000-alt.github.io/posts/first/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/posts/first/</guid>
-      <description>&lt;p&gt;안녕하세요 😄&lt;/p&gt;
-&lt;p&gt;내 첫 블로그!&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>품격 있는 대화를 위한 지식 브리핑</title>
-      <link>https://yoonseo8000000-alt.github.io/bookbot/book1/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/bookbot/book1/</guid>
-      <description>&lt;p&gt;YES24 베스트셀러 책 추천: 품격 있는 대화를 위한 지식 브리핑&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>프로젝트 헤일메리</title>
-      <link>https://yoonseo8000000-alt.github.io/bookbot/book2/</link>
-      <pubDate>Wed, 27 May 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/bookbot/book2/</guid>
-      <description>&lt;p&gt;YES24 베스트셀러 책 추천: 프로젝트 헤일메리&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
