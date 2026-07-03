@@ -12,17 +12,12 @@
 1. 데이터 표현
 텍스트 → 벡터 (Bag of Words)
 문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.
-
-어휘: [&ldquo;I&rdquo;, &ldquo;love&rdquo;, &ldquo;machine&rdquo;, &ldquo;learning&rdquo;]
-&ldquo;I love machine learning&rdquo; → [1, 1, 1, 1]
-&ldquo;I love deep learning&rdquo; → [1, 1, 0, 1]
-
 import numpy as np
 
 vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;]
 sent1 = np.array([1, 1, 1, 1])   # &#34;I love machine learning&#34;
 sent2 = np.array([1, 1, 0, 1])   # &#34;I love deep learning&#34;
-이미지 → 행렬">
+">
 <meta name="author" content="">
 <link rel="canonical" href="https://yoonseo8000000-alt.github.io/posts/2026-06-30-linear-algebra-basics/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
@@ -99,7 +94,7 @@ sent2 = np.array([1, 1, 0, 1])   # &#34;I love deep learning&#34;
   <meta property="og:description" content="개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.
 1. 데이터 표현 텍스트 → 벡터 (Bag of Words)
 문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.
-어휘: [“I”, “love”, “machine”, “learning”] “I love machine learning” → [1, 1, 1, 1] “I love deep learning” → [1, 1, 0, 1] import numpy as np vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;] sent1 = np.array([1, 1, 1, 1]) # &#34;I love machine learning&#34; sent2 = np.array([1, 1, 0, 1]) # &#34;I love deep learning&#34; 이미지 → 행렬">
+import numpy as np vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;] sent1 = np.array([1, 1, 1, 1]) # &#34;I love machine learning&#34; sent2 = np.array([1, 1, 0, 1]) # &#34;I love deep learning&#34;">
   <meta property="og:locale" content="ko_kr">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -116,7 +111,7 @@ sent2 = np.array([1, 1, 0, 1])   # &#34;I love deep learning&#34;
   <meta name="twitter:description" content="개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.
 1. 데이터 표현 텍스트 → 벡터 (Bag of Words)
 문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.
-어휘: [“I”, “love”, “machine”, “learning”] “I love machine learning” → [1, 1, 1, 1] “I love deep learning” → [1, 1, 0, 1] import numpy as np vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;] sent1 = np.array([1, 1, 1, 1]) # &#34;I love machine learning&#34; sent2 = np.array([1, 1, 0, 1]) # &#34;I love deep learning&#34; 이미지 → 행렬">
+import numpy as np vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;] sent1 = np.array([1, 1, 1, 1]) # &#34;I love machine learning&#34; sent2 = np.array([1, 1, 0, 1]) # &#34;I love deep learning&#34;">
 
 
 <script type="application/ld+json">
@@ -145,12 +140,12 @@ sent2 = np.array([1, 1, 0, 1])   # &#34;I love deep learning&#34;
   "@type": "BlogPosting",
   "headline": "머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지",
   "name": "머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지",
-  "description": "개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.\n1. 데이터 표현 텍스트 → 벡터 (Bag of Words)\n문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.\n어휘: [\u0026ldquo;I\u0026rdquo;, \u0026ldquo;love\u0026rdquo;, \u0026ldquo;machine\u0026rdquo;, \u0026ldquo;learning\u0026rdquo;] \u0026ldquo;I love machine learning\u0026rdquo; → [1, 1, 1, 1] \u0026ldquo;I love deep learning\u0026rdquo; → [1, 1, 0, 1] import numpy as np vocab = [\u0026#39;\u0026#34;I\u0026#34;\u0026#39;, \u0026#39;\u0026#34;love\u0026#34;\u0026#39;, \u0026#39;\u0026#34;machine\u0026#34;\u0026#39;, \u0026#39;\u0026#34;learning\u0026#34;\u0026#39;] sent1 = np.array([1, 1, 1, 1]) # \u0026#34;I love machine learning\u0026#34; sent2 = np.array([1, 1, 0, 1]) # \u0026#34;I love deep learning\u0026#34; 이미지 → 행렬\n",
+  "description": "개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.\n1. 데이터 표현 텍스트 → 벡터 (Bag of Words)\n문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.\nimport numpy as np vocab = [\u0026#39;\u0026#34;I\u0026#34;\u0026#39;, \u0026#39;\u0026#34;love\u0026#34;\u0026#39;, \u0026#39;\u0026#34;machine\u0026#34;\u0026#39;, \u0026#39;\u0026#34;learning\u0026#34;\u0026#39;] sent1 = np.array([1, 1, 1, 1]) # \u0026#34;I love machine learning\u0026#34; sent2 = np.array([1, 1, 0, 1]) # \u0026#34;I love deep learning\u0026#34; ",
   "keywords": [
     "이어드림스쿨", "선형대수학", "머신러닝", "수업정리", "Python"
   ],
-  "articleBody": "개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.\n1. 데이터 표현 텍스트 → 벡터 (Bag of Words)\n문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.\n어휘: [“I”, “love”, “machine”, “learning”] “I love machine learning” → [1, 1, 1, 1] “I love deep learning” → [1, 1, 0, 1] import numpy as np vocab = ['\"I\"', '\"love\"', '\"machine\"', '\"learning\"'] sent1 = np.array([1, 1, 1, 1]) # \"I love machine learning\" sent2 = np.array([1, 1, 0, 1]) # \"I love deep learning\" 이미지 → 행렬\n컬러 이미지는 R, G, B 세 채널의 픽셀 값 행렬로 구성된다. 45×40 크기 이미지는 45×40×3 형태이며, 이를 1차원으로 펼치면(flatten) 5,400차원 벡터가 된다.\nimg_rgb = np.random.randint(80, 256, (45, 40, 3), dtype=np.uint8) # 그레이스케일 변환 (ITU-R BT.601 가중합) gray = (0.299*img_rgb[:,:,0] + 0.587*img_rgb[:,:,1] + 0.114*img_rgb[:,:,2]).astype(np.uint8) print(img_rgb.shape) # (45, 40, 3) print(img_rgb.flatten().shape[0]) # 5400 2. 모델 표현 신경망의 한 층은 다음 식으로 표현된다.\nu = Wx + b y = f(u) x: 입력 벡터 / W: 가중치 행렬 / b: 편향 벡터 / f: 활성화 함수 n_in, n_out = 3, 4 x_input = np.array([[1.0], [0.5], [-0.3]]) # 입력 벡터 (3×1) W = np.random.randn(n_out, n_in).round(2) # 가중치 행렬 (4×3) b = np.random.randn(n_out, 1).round(2) # 편향 벡터 (4×1) u = W @ x_input + b # 선형 결합 y_relu = np.maximum(0, u) # ReLU 활성화 여러 층을 쌓으면 신경망 구조가 되며, 각 층은 행렬 곱과 비선형 변환의 반복으로 구성된다.\n3. 차원 축소 (PCA) 고차원 데이터를 저차원으로 압축하는 기법으로, 분산이 가장 큰 방향(주성분)을 찾아 데이터를 투영한다.\n절차\n데이터 행렬 X의 공분산 행렬 계산 공분산 행렬의 고유값 분해 (고유값 크기순 정렬) 상위 k개 고유벡터 방향으로 데이터 투영 각 주성분의 분산 설명 비율(Explained Variance Ratio) 확인 from sklearn.decomposition import PCA from sklearn.preprocessing import StandardScaler X_scaled = StandardScaler().fit_transform(X_3d) # 평균 0, 분산 1로 표준화 pca = PCA(n_components=3) X_pca = pca.fit_transform(X_scaled) evr = pca.explained_variance_ratio_ # 각 주성분의 분산 설명 비율 for i, e in enumerate(evr): print(f\"PC{i+1}: {e*100:.1f}%\") 3차원 데이터를 2차원으로 축소하는 실습에서, 상위 두 개 주성분(PC1, PC2)만으로 원본 데이터 분산의 대부분을 설명할 수 있음을 확인했다.\n퀴즈 풀이 요약 내적과 노름(Norm)\n두 벡터의 내적은 대응하는 성분끼리 곱한 뒤 합산한 값이고, 노름은 각 성분의 제곱합에 제곱근을 취한 값이다.\nx = np.array([1, -1, 0, 2, 4]) y = np.array([2, 1, 1, 3, 0]) inner = np.dot(x, y) # 내적: 7 norm_x = np.linalg.norm(x) # 노름: √22 norm_y = np.linalg.norm(y) # 노름: √15 내적의 선형성\n내적은 분배법칙이 성립한다. = 3, = -2일 때 \u003c2v1 - 3v2, w\u003e를 계산하면:\nv1 = np.array([1, 0, 0]) v2 = np.array([0, 1, 0]) w = np.array([3, -2, 0]) result = np.dot(2*v1 - 3*v2, w) # 분배법칙으로 검증 result_check = 2*np.dot(v1, w) - 3*np.dot(v2, w) print(result, result_check) # 12 12 행렬 곱셈\n첫 번째 행렬의 행과 두 번째 행렬의 열을 내적하는 연산이다. A가 m×r, B가 r×n 크기일 때만 곱셈이 정의되며, 결과는 m×n 크기다.\nA = np.array([[-1, 2], [-2, 1], [3, 4]]) # 3×2 B = np.array([[1, 0, 2], [2, -3, 1]]) # 2×3 result = np.dot(A, B) # 3×3 print(result) # [[ 3 -6 0] # [ 0 -3 -3] # [ 11 -12 10]] 주요 성질:\n교환법칙 불성립: AB ≠ BA 영행렬이 아닌 두 행렬의 곱이 영행렬이 될 수 있음 두 행렬의 곱이 단위행렬(I)이면 서로 역행렬 관계 커리큘럼 로드맵 기초: 벡터·행렬 연산 (덧셈, 뺄셈, 내적, 전치, 역행렬) 심화: 벡터 공간, 선형 변환, 고유값·고유벡터, 특이값 분해(SVD) ML 응용: PCA, 확률론 기초, 미분·경사하강법 DL 응용: 신경망 구조, 역전파 ",
-  "wordCount" : "578",
+  "articleBody": "개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.\n1. 데이터 표현 텍스트 → 벡터 (Bag of Words)\n문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.\nimport numpy as np vocab = ['\"I\"', '\"love\"', '\"machine\"', '\"learning\"'] sent1 = np.array([1, 1, 1, 1]) # \"I love machine learning\" sent2 = np.array([1, 1, 0, 1]) # \"I love deep learning\" 이미지 → 행렬\n컬러 이미지는 R, G, B 세 채널의 픽셀 값 행렬로 구성된다. 45×40 크기 이미지는 45×40×3 형태이며, 이를 1차원으로 펼치면(flatten) 5,400차원 벡터가 된다.\nimg_rgb = np.random.randint(80, 256, (45, 40, 3), dtype=np.uint8) gray = (0.299*img_rgb[:,:,0] + 0.587*img_rgb[:,:,1] + 0.114*img_rgb[:,:,2]).astype(np.uint8) print(img_rgb.shape) # (45, 40, 3) print(img_rgb.flatten().shape[0]) # 5400 2. 모델 표현 신경망의 한 층은 다음 식으로 표현된다.\nu = Wx + b y = f(u) x: 입력 벡터 / W: 가중치 행렬 / b: 편향 벡터 / f: 활성화 함수 n_in, n_out = 3, 4 x_input = np.array([[1.0], [0.5], [-0.3]]) W = np.random.randn(n_out, n_in).round(2) b = np.random.randn(n_out, 1).round(2) u = W @ x_input + b y_relu = np.maximum(0, u) 여러 층을 쌓으면 신경망 구조가 되며, 각 층은 행렬 곱과 비선형 변환의 반복으로 구성된다. 대표적인 활성화 함수 3종은 다음과 같다.\n3. 행렬과 선형 변환 행렬은 기하학적으로 벡터 공간을 다른 형태로 변환하는 연산으로 해석할 수 있다. 단위 원에 2×2 행렬을 곱하면 원이 타원으로 찌그러지는 것을 확인할 수 있다.\ntheta = np.linspace(0, 2*np.pi, 300) circle = np.array([np.cos(theta), np.sin(theta)]) transform_M = np.array([[2., 1.], [0.5, 1.5]]) transformed = transform_M @ circle 4. 차원 축소 (PCA) 고차원 데이터를 저차원으로 압축하는 기법으로, 분산이 가장 큰 방향(주성분)을 찾아 데이터를 투영한다.\n절차\n데이터 행렬 X의 공분산 행렬 계산 공분산 행렬의 고유값 분해 (고유값 크기순 정렬) 상위 k개 고유벡터 방향으로 데이터 투영 각 주성분의 분산 설명 비율(Explained Variance Ratio) 확인 from sklearn.decomposition import PCA from sklearn.preprocessing import StandardScaler X_scaled = StandardScaler().fit_transform(X_3d) pca = PCA(n_components=3) X_pca = pca.fit_transform(X_scaled) evr = pca.explained_variance_ratio_ for i, e in enumerate(evr): print(f\"PC{i+1}: {e*100:.1f}%\") 3차원 데이터를 2차원으로 축소하는 실습에서, 상위 두 개 주성분(PC1, PC2)만으로 원본 데이터 분산의 대부분을 설명할 수 있음을 확인했다.\n퀴즈 풀이 요약 내적과 노름(Norm)\n두 벡터의 내적은 대응하는 성분끼리 곱한 뒤 합산한 값이고, 노름은 각 성분의 제곱합에 제곱근을 취한 값이다.\nx = np.array([1, -1, 0, 2, 4]) y = np.array([2, 1, 1, 3, 0]) inner = np.dot(x, y) # 내적: 7 norm_x = np.linalg.norm(x) # 노름: √22 norm_y = np.linalg.norm(y) # 노름: √15 선형방정식으로 비즈니스 문제 풀기\n광고 채널 A, B에 대한 예산·시간 제약을 연립방정식으로 세우고, 행렬로 풀어 최적 집행 횟수를 구하는 실습이다.\n제약 조건이 바뀌었을 때(예산·시간 변화) 최적해가 어떻게 이동하는지도 함께 비교했다.\n행렬 곱셈\n첫 번째 행렬의 행과 두 번째 행렬의 열을 내적하는 연산이다. A가 m×r, B가 r×n 크기일 때만 곱셈이 정의되며, 결과는 m×n 크기다.\nA = np.array([[-1, 2], [-2, 1], [3, 4]]) # 3×2 B = np.array([[1, 0, 2], [2, -3, 1]]) # 2×3 result = np.dot(A, B) # 3×3 print(result) # [[ 3 -6 0] # [ 0 -3 -3] # [ 11 -12 10]] 주요 성질:\n교환법칙 불성립: AB ≠ BA 영행렬이 아닌 두 행렬의 곱이 영행렬이 될 수 있음 두 행렬의 곱이 단위행렬(I)이면 서로 역행렬 관계 커리큘럼 로드맵 기초: 벡터·행렬 연산 (덧셈, 뺄셈, 내적, 전치, 역행렬) 심화: 벡터 공간, 선형 변환, 고유값·고유벡터, 특이값 분해(SVD) ML 응용: PCA, 확률론 기초, 미분·경사하강법 DL 응용: 신경망 구조, 역전파 ",
+  "wordCount" : "547",
   "inLanguage": "en",
   "datePublished": "2026-06-30T00:00:00Z",
   "dateModified": "2026-06-30T00:00:00Z",
@@ -230,26 +225,22 @@ sent2 = np.array([1, 1, 0, 1])   # &#34;I love deep learning&#34;
 <h2 id="1-데이터-표현">1. 데이터 표현<a hidden class="anchor" aria-hidden="true" href="#1-데이터-표현">#</a></h2>
 <p><strong>텍스트 → 벡터 (Bag of Words)</strong></p>
 <p>문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.</p>
-<ul>
-<li>어휘: [&ldquo;I&rdquo;, &ldquo;love&rdquo;, &ldquo;machine&rdquo;, &ldquo;learning&rdquo;]</li>
-<li>&ldquo;I love machine learning&rdquo; → [1, 1, 1, 1]</li>
-<li>&ldquo;I love deep learning&rdquo; → [1, 1, 0, 1]</li>
-</ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>vocab <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;&#34;I&#34;&#39;</span>, <span style="color:#e6db74">&#39;&#34;love&#34;&#39;</span>, <span style="color:#e6db74">&#39;&#34;machine&#34;&#39;</span>, <span style="color:#e6db74">&#39;&#34;learning&#34;&#39;</span>]
 </span></span><span style="display:flex;"><span>sent1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>])   <span style="color:#75715e"># &#34;I love machine learning&#34;</span>
 </span></span><span style="display:flex;"><span>sent2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>])   <span style="color:#75715e"># &#34;I love deep learning&#34;</span>
-</span></span></code></pre></div><p><strong>이미지 → 행렬</strong></p>
+</span></span></code></pre></div><p><img alt="Bag-of-Words 벡터 표현" loading="lazy" src="/images/linear-algebra/bow-vector.png"></p>
+<p><strong>이미지 → 행렬</strong></p>
 <p>컬러 이미지는 R, G, B 세 채널의 픽셀 값 행렬로 구성된다. 45×40 크기 이미지는 45×40×3 형태이며, 이를 1차원으로 펼치면(flatten) 5,400차원 벡터가 된다.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>img_rgb <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randint(<span style="color:#ae81ff">80</span>, <span style="color:#ae81ff">256</span>, (<span style="color:#ae81ff">45</span>, <span style="color:#ae81ff">40</span>, <span style="color:#ae81ff">3</span>), dtype<span style="color:#f92672">=</span>np<span style="color:#f92672">.</span>uint8)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 그레이스케일 변환 (ITU-R BT.601 가중합)</span>
 </span></span><span style="display:flex;"><span>gray <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0.299</span><span style="color:#f92672">*</span>img_rgb[:,:,<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.587</span><span style="color:#f92672">*</span>img_rgb[:,:,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.114</span><span style="color:#f92672">*</span>img_rgb[:,:,<span style="color:#ae81ff">2</span>])<span style="color:#f92672">.</span>astype(np<span style="color:#f92672">.</span>uint8)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>print(img_rgb<span style="color:#f92672">.</span>shape)                    <span style="color:#75715e"># (45, 40, 3)</span>
 </span></span><span style="display:flex;"><span>print(img_rgb<span style="color:#f92672">.</span>flatten()<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>])       <span style="color:#75715e"># 5400</span>
-</span></span></code></pre></div><h2 id="2-모델-표현">2. 모델 표현<a hidden class="anchor" aria-hidden="true" href="#2-모델-표현">#</a></h2>
+</span></span></code></pre></div><p><img alt="이미지의 행렬 표현" loading="lazy" src="/images/linear-algebra/image-matrix.png"></p>
+<h2 id="2-모델-표현">2. 모델 표현<a hidden class="anchor" aria-hidden="true" href="#2-모델-표현">#</a></h2>
 <p>신경망의 한 층은 다음 식으로 표현된다.</p>
 <pre tabindex="0"><code>u = Wx + b
 y = f(u)
@@ -258,14 +249,23 @@ y = f(u)
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n_in, n_out <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>x_input <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1.0</span>], [<span style="color:#ae81ff">0.5</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">0.3</span>]])       <span style="color:#75715e"># 입력 벡터 (3×1)</span>
-</span></span><span style="display:flex;"><span>W <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_out, n_in)<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)         <span style="color:#75715e"># 가중치 행렬 (4×3)</span>
-</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_out, <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)            <span style="color:#75715e"># 편향 벡터 (4×1)</span>
+</span></span><span style="display:flex;"><span>x_input <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1.0</span>], [<span style="color:#ae81ff">0.5</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">0.3</span>]])
+</span></span><span style="display:flex;"><span>W <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_out, n_in)<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_out, <span style="color:#ae81ff">1</span>)<span style="color:#f92672">.</span>round(<span style="color:#ae81ff">2</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> W <span style="color:#f92672">@</span> x_input <span style="color:#f92672">+</span> b        <span style="color:#75715e"># 선형 결합</span>
-</span></span><span style="display:flex;"><span>y_relu <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(<span style="color:#ae81ff">0</span>, u)  <span style="color:#75715e"># ReLU 활성화</span>
-</span></span></code></pre></div><p>여러 층을 쌓으면 신경망 구조가 되며, 각 층은 행렬 곱과 비선형 변환의 반복으로 구성된다.</p>
-<h2 id="3-차원-축소-pca">3. 차원 축소 (PCA)<a hidden class="anchor" aria-hidden="true" href="#3-차원-축소-pca">#</a></h2>
+</span></span><span style="display:flex;"><span>u <span style="color:#f92672">=</span> W <span style="color:#f92672">@</span> x_input <span style="color:#f92672">+</span> b
+</span></span><span style="display:flex;"><span>y_relu <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(<span style="color:#ae81ff">0</span>, u)
+</span></span></code></pre></div><p>여러 층을 쌓으면 신경망 구조가 되며, 각 층은 행렬 곱과 비선형 변환의 반복으로 구성된다. 대표적인 활성화 함수 3종은 다음과 같다.</p>
+<p><img alt="활성화 함수 비교" loading="lazy" src="/images/linear-algebra/activation-functions.png"></p>
+<h2 id="3-행렬과-선형-변환">3. 행렬과 선형 변환<a hidden class="anchor" aria-hidden="true" href="#3-행렬과-선형-변환">#</a></h2>
+<p>행렬은 기하학적으로 벡터 공간을 다른 형태로 변환하는 연산으로 해석할 수 있다. 단위 원에 2×2 행렬을 곱하면 원이 타원으로 찌그러지는 것을 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>theta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>pi, <span style="color:#ae81ff">300</span>)
+</span></span><span style="display:flex;"><span>circle <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([np<span style="color:#f92672">.</span>cos(theta), np<span style="color:#f92672">.</span>sin(theta)])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>transform_M <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2.</span>, <span style="color:#ae81ff">1.</span>], [<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">1.5</span>]])
+</span></span><span style="display:flex;"><span>transformed <span style="color:#f92672">=</span> transform_M <span style="color:#f92672">@</span> circle
+</span></span></code></pre></div><p><img alt="행렬을 이용한 선형 변환" loading="lazy" src="/images/linear-algebra/linear-transform.png"></p>
+<h2 id="4-차원-축소-pca">4. 차원 축소 (PCA)<a hidden class="anchor" aria-hidden="true" href="#4-차원-축소-pca">#</a></h2>
 <p>고차원 데이터를 저차원으로 압축하는 기법으로, 분산이 가장 큰 방향(주성분)을 찾아 데이터를 투영한다.</p>
 <p><strong>절차</strong></p>
 <ol>
@@ -277,15 +277,16 @@ y = f(u)
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.decomposition <span style="color:#f92672">import</span> PCA
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.preprocessing <span style="color:#f92672">import</span> StandardScaler
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>X_scaled <span style="color:#f92672">=</span> StandardScaler()<span style="color:#f92672">.</span>fit_transform(X_3d)   <span style="color:#75715e"># 평균 0, 분산 1로 표준화</span>
+</span></span><span style="display:flex;"><span>X_scaled <span style="color:#f92672">=</span> StandardScaler()<span style="color:#f92672">.</span>fit_transform(X_3d)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>pca <span style="color:#f92672">=</span> PCA(n_components<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
 </span></span><span style="display:flex;"><span>X_pca <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>fit_transform(X_scaled)
-</span></span><span style="display:flex;"><span>evr <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>explained_variance_ratio_               <span style="color:#75715e"># 각 주성분의 분산 설명 비율</span>
+</span></span><span style="display:flex;"><span>evr <span style="color:#f92672">=</span> pca<span style="color:#f92672">.</span>explained_variance_ratio_
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, e <span style="color:#f92672">in</span> enumerate(evr):
 </span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;PC</span><span style="color:#e6db74">{</span>i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span><span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>e<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span><span style="color:#e6db74">:</span><span style="color:#e6db74">.1f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">%&#34;</span>)
 </span></span></code></pre></div><p>3차원 데이터를 2차원으로 축소하는 실습에서, 상위 두 개 주성분(PC1, PC2)만으로 원본 데이터 분산의 대부분을 설명할 수 있음을 확인했다.</p>
+<p><img alt="PCA를 이용한 차원 축소" loading="lazy" src="/images/linear-algebra/pca-dimension-reduction.png"></p>
 <h2 id="퀴즈-풀이-요약">퀴즈 풀이 요약<a hidden class="anchor" aria-hidden="true" href="#퀴즈-풀이-요약">#</a></h2>
 <p><strong>내적과 노름(Norm)</strong></p>
 <p>두 벡터의 내적은 대응하는 성분끼리 곱한 뒤 합산한 값이고, 노름은 각 성분의 제곱합에 제곱근을 취한 값이다.</p>
@@ -295,18 +296,12 @@ y = f(u)
 </span></span><span style="display:flex;"><span>inner <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(x, y)                  <span style="color:#75715e"># 내적: 7</span>
 </span></span><span style="display:flex;"><span>norm_x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(x)            <span style="color:#75715e"># 노름: √22</span>
 </span></span><span style="display:flex;"><span>norm_y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(y)            <span style="color:#75715e"># 노름: √15</span>
-</span></span></code></pre></div><p><strong>내적의 선형성</strong></p>
-<p>내적은 분배법칙이 성립한다. <code>&lt;v1, w&gt; = 3</code>, <code>&lt;v2, w&gt; = -2</code>일 때 <code>&lt;2v1 - 3v2, w&gt;</code>를 계산하면:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>v1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>])
-</span></span><span style="display:flex;"><span>v2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>])
-</span></span><span style="display:flex;"><span>w <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>])
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>dot(<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>v1 <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>v2, w)
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 분배법칙으로 검증</span>
-</span></span><span style="display:flex;"><span>result_check <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>dot(v1, w) <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">*</span>np<span style="color:#f92672">.</span>dot(v2, w)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>print(result, result_check)  <span style="color:#75715e"># 12 12</span>
-</span></span></code></pre></div><p><strong>행렬 곱셈</strong></p>
+</span></span></code></pre></div><p><strong>선형방정식으로 비즈니스 문제 풀기</strong></p>
+<p>광고 채널 A, B에 대한 예산·시간 제약을 연립방정식으로 세우고, 행렬로 풀어 최적 집행 횟수를 구하는 실습이다.</p>
+<p><img alt="선형방정식으로 최적해 구하기" loading="lazy" src="/images/linear-algebra/quiz-linear-equations.png"></p>
+<p>제약 조건이 바뀌었을 때(예산·시간 변화) 최적해가 어떻게 이동하는지도 함께 비교했다.</p>
+<p><img alt="제약 조건 변화에 따른 시나리오 비교" loading="lazy" src="/images/linear-algebra/quiz-scenario-comparison.png"></p>
+<p><strong>행렬 곱셈</strong></p>
 <p>첫 번째 행렬의 행과 두 번째 행렬의 열을 내적하는 연산이다. A가 m×r, B가 r×n 크기일 때만 곱셈이 정의되며, 결과는 m×n 크기다.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>]])   <span style="color:#75715e"># 3×2</span>
 </span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>]])       <span style="color:#75715e"># 2×3</span>
@@ -323,6 +318,7 @@ y = f(u)
 <li>두 행렬의 곱이 단위행렬(I)이면 서로 역행렬 관계</li>
 </ul>
 <h2 id="커리큘럼-로드맵">커리큘럼 로드맵<a hidden class="anchor" aria-hidden="true" href="#커리큘럼-로드맵">#</a></h2>
+<p><img alt="선형대수학 학습 로드맵" loading="lazy" src="/images/linear-algebra/curriculum-roadmap.png"></p>
 <ol>
 <li><strong>기초</strong>: 벡터·행렬 연산 (덧셈, 뺄셈, 내적, 전치, 역행렬)</li>
 <li><strong>심화</strong>: 벡터 공간, 선형 변환, 고유값·고유벡터, 특이값 분해(SVD)</li>

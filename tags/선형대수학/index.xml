@@ -18,17 +18,12 @@
 &lt;h2 id=&#34;1-데이터-표현&#34;&gt;1. 데이터 표현&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;텍스트 → 벡터 (Bag of Words)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;어휘: [&amp;ldquo;I&amp;rdquo;, &amp;ldquo;love&amp;rdquo;, &amp;ldquo;machine&amp;rdquo;, &amp;ldquo;learning&amp;rdquo;]&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;I love machine learning&amp;rdquo; → [1, 1, 1, 1]&lt;/li&gt;
-&lt;li&gt;&amp;ldquo;I love deep learning&amp;rdquo; → [1, 1, 0, 1]&lt;/li&gt;
-&lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vocab &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#34;I&amp;#34;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#34;love&amp;#34;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#34;machine&amp;#34;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&amp;#34;learning&amp;#34;&amp;#39;&lt;/span&gt;]
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sent1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])   &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;I love machine learning&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sent2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;array([&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;])   &lt;span style=&#34;color:#75715e&#34;&gt;# &amp;#34;I love deep learning&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;이미지 → 행렬&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img alt=&#34;Bag-of-Words 벡터 표현&#34; loading=&#34;lazy&#34; src=&#34;https://yoonseo8000000-alt.github.io/images/linear-algebra/bow-vector.png&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
