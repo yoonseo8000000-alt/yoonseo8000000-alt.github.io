@@ -64,7 +64,21 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
 </script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1HQS37SS0"></script>
       <script>
         var doNotTrack = false;

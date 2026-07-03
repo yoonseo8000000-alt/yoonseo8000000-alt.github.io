@@ -6,8 +6,24 @@
     <description>Recent content in 선형대수학 on yoonseo blog</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Tue, 30 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoonseo8000000-alt.github.io/tags/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>선형대수학: 벡터 공간과 부분공간, 기저와 Gram-Schmidt 직교화</title>
+      <link>https://yoonseo8000000-alt.github.io/posts/2026-07-01-vector-space-subspace/</link>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/posts/2026-07-01-vector-space-subspace/</guid>
+      <description>&lt;h2 id=&#34;개요&#34;&gt;개요&lt;/h2&gt;
+&lt;p&gt;벡터 공간 안에서 더 작은 구조인 부분공간을 정의하고, 이를 다루기 위한 핵심 개념들(일차결합, 일차독립, 기저, 직교기저)을 정리한다. 마지막으로 임의의 기저를 직교기저로 바꾸는 Gram-Schmidt 과정을 다룬다.&lt;/p&gt;
+&lt;h2 id=&#34;1-부분공간-subspace&#34;&gt;1. 부분공간 (Subspace)&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;정의&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;$W(\neq \varnothing)$이 벡터공간 $R^n$의 부분집합일 때, 다음 두 조건을 만족하면 $W$를 $R^n$의 부분공간이라 한다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;덧셈에 닫혀 있음: $x, y \in W \Rightarrow x + y \in W$&lt;/li&gt;
+&lt;li&gt;스칼라 곱에 닫혀 있음: $x \in W \Rightarrow \lambda x \in W \ (\forall \lambda \in \mathbb{R})$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;부분공간은 반드시 원점(0벡터)을 포함해야 한다 ($\lambda = 0$을 대입하면 성립).&lt;/p&gt;</description>
+    </item>
     <item>
       <title>머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지</title>
       <link>https://yoonseo8000000-alt.github.io/posts/2026-06-30-linear-algebra-basics/</link>

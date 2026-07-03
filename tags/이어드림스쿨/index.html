@@ -65,7 +65,21 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
 </script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1HQS37SS0"></script>
       <script>
         var doNotTrack = false;
@@ -137,6 +151,24 @@
     이어드림스쿨
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">선형대수학: 벡터 공간과 부분공간, 기저와 Gram-Schmidt 직교화
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>개요 벡터 공간 안에서 더 작은 구조인 부분공간을 정의하고, 이를 다루기 위한 핵심 개념들(일차결합, 일차독립, 기저, 직교기저)을 정리한다. 마지막으로 임의의 기저를 직교기저로 바꾸는 Gram-Schmidt 과정을 다룬다.
+1. 부분공간 (Subspace) 정의
+$W(\neq \varnothing)$이 벡터공간 $R^n$의 부분집합일 때, 다음 두 조건을 만족하면 $W$를 $R^n$의 부분공간이라 한다.
+덧셈에 닫혀 있음: $x, y \in W \Rightarrow x &#43; y \in W$ 스칼라 곱에 닫혀 있음: $x \in W \Rightarrow \lambda x \in W \ (\forall \lambda \in \mathbb{R})$ 부분공간은 반드시 원점(0벡터)을 포함해야 한다 ($\lambda = 0$을 대입하면 성립).
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-07-01 00:00:00 +0000 UTC'>2026년 7월 1일</span></footer>
+  <a class="entry-link" aria-label="post link to 선형대수학: 벡터 공간과 부분공간, 기저와 Gram-Schmidt 직교화" href="https://yoonseo8000000-alt.github.io/posts/2026-07-01-vector-space-subspace/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
