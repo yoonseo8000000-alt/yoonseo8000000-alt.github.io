@@ -6,8 +6,34 @@
     <description>Recent content in 머신러닝 on yoonseo blog</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Thu, 02 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoonseo8000000-alt.github.io/tags/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>고윳값, 고유벡터, 행렬의 대각화</title>
+      <link>https://yoonseo8000000-alt.github.io/posts/2026-07-03-eigenvalues-diagonalization/</link>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/posts/2026-07-03-eigenvalues-diagonalization/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;머신러닝을 위한 선형대수학 6강. 고윳값(eigenvalue)과 고유벡터(eigenvector)의 정의부터 시작해서, 행렬의 대각화, 대칭행렬의 Eigen Decomposition, 양의 정부호 행렬(PDM), 행렬의 제곱근, 그리고 스펙트럴 클러스터링까지 정리했다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;목차&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;고윳값, 고유벡터의 정의&lt;/li&gt;
+&lt;li&gt;행렬의 대각화&lt;/li&gt;
+&lt;li&gt;대칭 행렬의 대각화 (Eigen Decomposition)&lt;/li&gt;
+&lt;li&gt;양의 정부호 행렬 (Positive Definite Matrix)&lt;/li&gt;
+&lt;li&gt;외적과 행렬의 제곱근&lt;/li&gt;
+&lt;li&gt;스펙트럴 클러스터링 (Spectral Clustering)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-고윳값-고유벡터의-정의&#34;&gt;1. 고윳값, 고유벡터의 정의&lt;/h2&gt;
+&lt;p&gt;$n \times n$ 행렬 $A$를 선형변환이라 할 때, 0이 아닌 벡터 $v$가 다음을 만족하면:&lt;/p&gt;
+&lt;p&gt;$$Av = \lambda v$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\lambda$: 행렬 $A$의 &lt;strong&gt;고윳값(eigenvalue)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;$v$: 고윳값 $\lambda$에 대한 &lt;strong&gt;고유벡터(eigenvector)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;고유벡터는 행렬 $A$에 의해 변환되어도 &lt;strong&gt;방향이 변하지 않고 크기만 $\lambda$배&lt;/strong&gt; 변하는 특별한 벡터다.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)</title>
       <link>https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/</link>

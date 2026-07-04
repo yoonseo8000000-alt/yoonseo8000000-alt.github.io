@@ -163,77 +163,106 @@
 
 <article class="first-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">내면 근력
+    <h2 class="entry-hint-parent">고윳값, 고유벡터, 행렬의 대각화
     </h2>
   </header>
   <div class="entry-content">
-    <p>YES24 베스트셀러 책 추천: 내면 근력
-</p>
+    <p>Overview 머신러닝을 위한 선형대수학 6강. 고윳값(eigenvalue)과 고유벡터(eigenvector)의 정의부터 시작해서, 행렬의 대각화, 대칭행렬의 Eigen Decomposition, 양의 정부호 행렬(PDM), 행렬의 제곱근, 그리고 스펙트럴 클러스터링까지 정리했다.
+목차
+고윳값, 고유벡터의 정의 행렬의 대각화 대칭 행렬의 대각화 (Eigen Decomposition) 양의 정부호 행렬 (Positive Definite Matrix) 외적과 행렬의 제곱근 스펙트럴 클러스터링 (Spectral Clustering) 1. 고윳값, 고유벡터의 정의 $n \times n$ 행렬 $A$를 선형변환이라 할 때, 0이 아닌 벡터 $v$가 다음을 만족하면:
+$$Av = \lambda v$$
+$\lambda$: 행렬 $A$의 고윳값(eigenvalue) $v$: 고윳값 $\lambda$에 대한 고유벡터(eigenvector) 고유벡터는 행렬 $A$에 의해 변환되어도 방향이 변하지 않고 크기만 $\lambda$배 변하는 특별한 벡터다.
+...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-05-27 00:00:00 +0000 UTC'>2026년 5월 27일</span></footer>
-  <a class="entry-link" aria-label="post link to 내면 근력" href="https://yoonseo8000000-alt.github.io/bookbot/book3/"></a>
+<span title='2026-07-03 00:00:00 +0000 UTC'>2026년 7월 3일</span></footer>
+  <a class="entry-link" aria-label="post link to 고윳값, 고유벡터, 행렬의 대각화" href="https://yoonseo8000000-alt.github.io/posts/2026-07-03-eigenvalues-diagonalization/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">사랑이 있으니 살아집디다
+    <h2 class="entry-hint-parent">머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)
     </h2>
   </header>
   <div class="entry-content">
-    <p>YES24 베스트셀러 책 추천: 사랑이 있으니 살아집디다
-</p>
+    <p>목차 행렬을 보는 3가지 관점 벡터공간으로써의 행렬 연산 행렬의 크기 — Frobenius Norm 특수 행렬 (대각, 단위, 대칭, 직교행렬) 역행렬 선형변환 행렬의 Rank 행렬식 (Determinant) 직교행렬의 함수적 성질 신경망에서의 선형 변환 응용 1. 행렬을 보는 3가지 관점 행렬은 크게 3가지 관점으로 바라볼 수 있다.
+관점 1 — 벡터공간의 확장 벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다. 행렬은 이 개념을 2차원으로 확장한 것이다.
+$$ A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \ 3 &amp; 2 &amp; -1 \end{pmatrix}, \quad B = \begin{pmatrix} 3 &amp; 5 &amp; -7 \ 0 &amp; 4 &amp; 1 \end{pmatrix} $$
+...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-05-27 00:00:00 +0000 UTC'>2026년 5월 27일</span></footer>
-  <a class="entry-link" aria-label="post link to 사랑이 있으니 살아집디다" href="https://yoonseo8000000-alt.github.io/bookbot/book5/"></a>
+<span title='2026-07-02 00:00:00 +0000 UTC'>2026년 7월 2일</span></footer>
+  <a class="entry-link" aria-label="post link to 머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)" href="https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">사춘기 엄마의 오장육부
+    <h2 class="entry-hint-parent">선형대수학: 벡터 공간과 부분공간, 기저와 Gram-Schmidt 직교화
     </h2>
   </header>
   <div class="entry-content">
-    <p>YES24 베스트셀러 책 추천: 사춘기 엄마의 오장육부
-</p>
+    <p>개요 벡터 공간 안에서 더 작은 구조인 부분공간을 정의하고, 이를 다루기 위한 핵심 개념들(일차결합, 일차독립, 기저, 직교기저)을 정리한다. 마지막으로 임의의 기저를 직교기저로 바꾸는 Gram-Schmidt 과정을 다룬다.
+1. 부분공간 (Subspace) 정의
+$W(\neq \varnothing)$이 벡터공간 $R^n$의 부분집합일 때, 다음 두 조건을 만족하면 $W$를 $R^n$의 부분공간이라 한다.
+덧셈에 닫혀 있음: $x, y \in W \Rightarrow x &#43; y \in W$ 스칼라 곱에 닫혀 있음: $x \in W \Rightarrow \lambda x \in W \ (\forall \lambda \in \mathbb{R})$ 부분공간은 반드시 원점(0벡터)을 포함해야 한다 ($\lambda = 0$을 대입하면 성립).
+...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-05-27 00:00:00 +0000 UTC'>2026년 5월 27일</span></footer>
-  <a class="entry-link" aria-label="post link to 사춘기 엄마의 오장육부" href="https://yoonseo8000000-alt.github.io/bookbot/book4/"></a>
+<span title='2026-07-01 00:00:00 +0000 UTC'>2026년 7월 1일</span></footer>
+  <a class="entry-link" aria-label="post link to 선형대수학: 벡터 공간과 부분공간, 기저와 Gram-Schmidt 직교화" href="https://yoonseo8000000-alt.github.io/posts/2026-07-01-vector-space-subspace/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">품격 있는 대화를 위한 지식 브리핑
+    <h2 class="entry-hint-parent">머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지
     </h2>
   </header>
   <div class="entry-content">
-    <p>YES24 베스트셀러 책 추천: 품격 있는 대화를 위한 지식 브리핑
-</p>
+    <p>개요 머신러닝과 딥러닝에서 데이터와 모델은 대부분 벡터와 행렬로 표현된다. 이번 수업에서는 데이터 표현, 모델 표현, 차원 축소라는 세 가지 관점에서 선형대수학의 쓰임을 다뤘다.
+1. 데이터 표현 텍스트 → 벡터 (Bag of Words)
+문장을 고정 길이 숫자 벡터로 변환하는 기본 방법. 어휘 목록을 기준으로 단어의 등장 여부를 1과 0으로 표시한다.
+import numpy as np vocab = [&#39;&#34;I&#34;&#39;, &#39;&#34;love&#34;&#39;, &#39;&#34;machine&#34;&#39;, &#39;&#34;learning&#34;&#39;] sent1 = np.array([1, 1, 1, 1]) # &#34;I love machine learning&#34; sent2 = np.array([1, 1, 0, 1]) # &#34;I love deep learning&#34; ...</p>
   </div>
   <footer class="entry-footer">
 
-<span title='2026-05-27 00:00:00 +0000 UTC'>2026년 5월 27일</span></footer>
-  <a class="entry-link" aria-label="post link to 품격 있는 대화를 위한 지식 브리핑" href="https://yoonseo8000000-alt.github.io/bookbot/book1/"></a>
+<span title='2026-06-30 00:00:00 +0000 UTC'>2026년 6월 30일</span></footer>
+  <a class="entry-link" aria-label="post link to 머신러닝을 위한 선형대수학 기초 정리: 벡터, 행렬, 그리고 PCA까지" href="https://yoonseo8000000-alt.github.io/posts/2026-06-30-linear-algebra-basics/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">프로젝트 헤일메리
+    <h2 class="entry-hint-parent">2021 요소수 대란 데이터 분석: 인터렉티브 지도로 재고 위기 시각화하기
     </h2>
   </header>
   <div class="entry-content">
-    <p>YES24 베스트셀러 책 추천: 프로젝트 헤일메리
+    <p>프로젝트 개요 이어드림스쿨 6기 첫 팀 프로젝트. 2021년 한국에서 발생한 요소수 수급 위기를 데이터로 분석. 5인 팀으로 진행, 지역별 주유소 재고 현황을 한눈에 파악할 수 있는 인터렉티브 지도를 만드는 것이 목표.
+담당 역할: 프로젝트 방향성 설정, AI 도구를 활용한 분석 전략 수립, 최종 발표자료(PPT) 제작
+문제 정의 2021년 요소수 대란은 뉴스에서 “전국적으로 심각했다&#34;고만 보도됐지만, 실제로 지역별 편차가 어느 정도였는지, 어떤 패턴이 있었는지는 명확히 드러나지 않았다. 이 프로젝트에서 답하고자 한 질문은 두 가지.
+...</p>
+  </div>
+  <footer class="entry-footer">
+
+<span title='2026-06-27 00:00:00 +0000 UTC'>2026년 6월 27일</span></footer>
+  <a class="entry-link" aria-label="post link to 2021 요소수 대란 데이터 분석: 인터렉티브 지도로 재고 위기 시각화하기" href="https://yoonseo8000000-alt.github.io/posts/2026-06-27-urea-project/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">첫 글
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>안녕하세요 😄
+내 첫 블로그!
 </p>
   </div>
   <footer class="entry-footer">
 
 <span title='2026-05-27 00:00:00 +0000 UTC'>2026년 5월 27일</span></footer>
-  <a class="entry-link" aria-label="post link to 프로젝트 헤일메리" href="https://yoonseo8000000-alt.github.io/bookbot/book2/"></a>
+  <a class="entry-link" aria-label="post link to 첫 글" href="https://yoonseo8000000-alt.github.io/posts/first/"></a>
 </article>
     </main>
     
