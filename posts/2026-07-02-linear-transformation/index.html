@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation) | yoonseo blog</title>
+<meta name="keywords" content="선형대수, 머신러닝, 이어드림스쿨">
+<meta name="description" content="목차
+
+행렬을 보는 3가지 관점
+벡터공간으로써의 행렬 연산
+행렬의 크기 — Frobenius Norm
+특수 행렬 (대각, 단위, 대칭, 직교행렬)
+역행렬
+선형변환
+행렬의 Rank
+행렬식 (Determinant)
+직교행렬의 함수적 성질
+신경망에서의 선형 변환 응용
+
+
+1. 행렬을 보는 3가지 관점
+행렬은 크게 3가지 관점으로 바라볼 수 있다.
+관점 1 — 벡터공간의 확장
+벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다.
+행렬은 이 개념을 2차원으로 확장한 것이다.
+$$
+A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \ 3 &amp; 2 &amp; -1 \end{pmatrix}, \quad
+B = \begin{pmatrix} 3 &amp; 5 &amp; -7 \ 0 &amp; 4 &amp; 1 \end{pmatrix}
+$$">
+<meta name="author" content="">
+<link rel="canonical" href="https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yoonseo8000000-alt.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yoonseo8000000-alt.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yoonseo8000000-alt.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yoonseo8000000-alt.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yoonseo8000000-alt.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1HQS37SS0"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L1HQS37SS0');
+        }
+      </script><meta property="og:url" content="https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/">
+  <meta property="og:site_name" content="yoonseo blog">
+  <meta property="og:title" content="머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)">
+  <meta property="og:description" content="목차 행렬을 보는 3가지 관점 벡터공간으로써의 행렬 연산 행렬의 크기 — Frobenius Norm 특수 행렬 (대각, 단위, 대칭, 직교행렬) 역행렬 선형변환 행렬의 Rank 행렬식 (Determinant) 직교행렬의 함수적 성질 신경망에서의 선형 변환 응용 1. 행렬을 보는 3가지 관점 행렬은 크게 3가지 관점으로 바라볼 수 있다.
+관점 1 — 벡터공간의 확장 벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다. 행렬은 이 개념을 2차원으로 확장한 것이다.
+$$ A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \ 3 &amp; 2 &amp; -1 \end{pmatrix}, \quad B = \begin{pmatrix} 3 &amp; 5 &amp; -7 \ 0 &amp; 4 &amp; 1 \end{pmatrix} $$">
+  <meta property="og:locale" content="ko_kr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-02T00:00:00+00:00">
+    <meta property="article:tag" content="선형대수">
+    <meta property="article:tag" content="머신러닝">
+    <meta property="article:tag" content="이어드림스쿨">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)">
+  <meta name="twitter:description" content="목차 행렬을 보는 3가지 관점 벡터공간으로써의 행렬 연산 행렬의 크기 — Frobenius Norm 특수 행렬 (대각, 단위, 대칭, 직교행렬) 역행렬 선형변환 행렬의 Rank 행렬식 (Determinant) 직교행렬의 함수적 성질 신경망에서의 선형 변환 응용 1. 행렬을 보는 3가지 관점 행렬은 크게 3가지 관점으로 바라볼 수 있다.
+관점 1 — 벡터공간의 확장 벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다. 행렬은 이 개념을 2차원으로 확장한 것이다.
+$$ A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \ 3 &amp; 2 &amp; -1 \end{pmatrix}, \quad B = \begin{pmatrix} 3 &amp; 5 &amp; -7 \ 0 &amp; 4 &amp; 1 \end{pmatrix} $$">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yoonseo8000000-alt.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)",
+      "item": "https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)",
+  "name": "머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)",
+  "description": "목차 행렬을 보는 3가지 관점 벡터공간으로써의 행렬 연산 행렬의 크기 — Frobenius Norm 특수 행렬 (대각, 단위, 대칭, 직교행렬) 역행렬 선형변환 행렬의 Rank 행렬식 (Determinant) 직교행렬의 함수적 성질 신경망에서의 선형 변환 응용 1. 행렬을 보는 3가지 관점 행렬은 크게 3가지 관점으로 바라볼 수 있다.\n관점 1 — 벡터공간의 확장 벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다. 행렬은 이 개념을 2차원으로 확장한 것이다.\n$$ A = \\begin{pmatrix} 1 \u0026amp; 2 \u0026amp; -1 \\ 3 \u0026amp; 2 \u0026amp; -1 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 3 \u0026amp; 5 \u0026amp; -7 \\ 0 \u0026amp; 4 \u0026amp; 1 \\end{pmatrix} $$\n",
+  "keywords": [
+    "선형대수", "머신러닝", "이어드림스쿨"
+  ],
+  "articleBody": "목차 행렬을 보는 3가지 관점 벡터공간으로써의 행렬 연산 행렬의 크기 — Frobenius Norm 특수 행렬 (대각, 단위, 대칭, 직교행렬) 역행렬 선형변환 행렬의 Rank 행렬식 (Determinant) 직교행렬의 함수적 성질 신경망에서의 선형 변환 응용 1. 행렬을 보는 3가지 관점 행렬은 크게 3가지 관점으로 바라볼 수 있다.\n관점 1 — 벡터공간의 확장 벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다. 행렬은 이 개념을 2차원으로 확장한 것이다.\n$$ A = \\begin{pmatrix} 1 \u0026 2 \u0026 -1 \\ 3 \u0026 2 \u0026 -1 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 3 \u0026 5 \u0026 -7 \\ 0 \u0026 4 \u0026 1 \\end{pmatrix} $$\nimport numpy as np A = np.array([[1, 2, -1], [3, 2, -1]]) B = np.array([[3, 5, -7], [0, 4, 1]]) k = 3 print(f\"A + B =\\n{A + B}\") print(f\"{k}A =\\n{k * A}\") 2. 벡터공간으로써의 행렬 연산 (정리 5.1) $A = (a_{ij}),\\ B = (b_{ij}) \\in M_{m \\times n},\\ k \\in \\mathbb{R}$ 일 때:\n덧셈: $A + B = (a_{ij} + b_{ij})$ 스칼라 곱: $kA = (ka_{ij})$ 법칙 식 교환법칙 $A + B = B + A$ 결합법칙 $(A+B)+C = A+(B+C)$ 항등원 $A + \\mathbf{0} = A$ 역원 $A + (-A) = \\mathbf{0}$ rng = np.random.default_rng(42) A = rng.integers(-5, 6, (3, 3)).astype(float) B = rng.integers(-5, 6, (3, 3)).astype(float) print(\"교환법칙:\", np.allclose(A + B, B + A)) 3. 행렬의 크기 — Frobenius Norm 행렬도 하나의 벡터이므로 벡터처럼 크기를 정의할 수 있다.\n$$ |A|F = \\left(\\sum{i=1}^{m}\\sum_{j=1}^{n} a_{ij}^2\\right)^{\\frac{1}{2}} $$\nA = np.array([[2, -1, 5], [0, 2, 1], [3, 1, 1]], dtype=float) frob_manual = np.sqrt(np.sum(A**2)) frob_numpy = np.linalg.norm(A, 'fro') print(f\"||A||_F = {frob_manual:.6f}\") 4. 특수 행렬 전치행렬 (정의 5.3) $(i,j)$ 성분을 $(j,i)$ 성분으로 바꾼 행렬. 연산법칙:\n$$ (AB)^\\top = B^\\top A^\\top $$\n⚠️ 순서가 바뀐다는 점에 주의!\n대각행렬 / 단위행렬 / 대칭행렬 / 직교행렬 I3 = np.eye(3) D = np.diag([2, 3, -2]) S = np.array([[1, 2, 4], [2, 1, 3], [4, 3, 1]]) # 대칭 theta = np.pi / 4 R = np.array([[np.cos(theta), -np.sin(theta)], [np.sin(theta), np.cos(theta)]]) # 직교 (회전) 5. 역행렬 (정리 5.7) $A, B$가 정칙행렬일 때:\n성질 식 곱의 역행렬 $(AB)^{-1} = B^{-1}A^{-1}$ 스칼라 곱 $(kA)^{-1} = \\frac{1}{k}A^{-1}$ 전치의 역 $(A^\\top)^{-1} = (A^{-1})^\\top$ A = np.array([[3, 1, 0], [1, 2, 1], [-1, 2, 3]], dtype=float) A_inv = np.linalg.inv(A) print(f\"A @ A⁻¹ =\\n{np.round(A @ A_inv, 10)}\") B = np.array([[2, 0, 1], [1, 3, 0], [0, 1, 2]], dtype=float) print(\"(AB)⁻¹ = B⁻¹A⁻¹?\", np.allclose(np.linalg.inv(A@B), np.linalg.inv(B) @ np.linalg.inv(A))) 6. 선형변환 (Linear Transformation) $m \\times n$ 행렬 $A$는 벡터공간 $\\mathbb{R}^n$에서 $\\mathbb{R}^m$으로의 함수이며, 다음 선형법칙을 만족한다:\n$$ A(\\boldsymbol{x}+\\boldsymbol{y}) = A\\boldsymbol{x} + A\\boldsymbol{y}, \\qquad A(\\lambda\\boldsymbol{x}) = \\lambda A\\boldsymbol{x} $$\n# 단위원을 변환하는 3가지 예시 transforms = [ (np.array([[2, 0], [0, 1]]), '스케일링 (x축 2배)'), (np.array([[np.cos(np.pi/3), -np.sin(np.pi/3)], [np.sin(np.pi/3), np.cos(np.pi/3)]]), '회전 (60°)'), (np.array([[1, 1], [0, 1]]), '전단 변환 (Shear)'), ] 7. 행렬의 Rank $m \\times n$ 행렬 $A$에서 행벡터(또는 열벡터) 중 일차독립인 벡터의 최대 개수.\n$$ n = \\dim{\\boldsymbol{x} \\in \\mathbb{R}^n \\mid A\\boldsymbol{x} = \\boldsymbol{0}} + \\text{rank},A $$\nA = np.array([[-1, 2, -2], [3, 4, -5]], dtype=float) print(f\"rank(A) = {np.linalg.matrix_rank(A)}\") B = np.array([[2, 0, 0], [-5, 1, 2], [3, 8, -7]], dtype=float) print(f\"det(B) = {np.linalg.det(B):.2f}\") print(f\"rank(B) = {np.linalg.matrix_rank(B)}\") 8. 행렬식 (Determinant) 2×2 $$ \\det(A) = a_{11}a_{22} - a_{12}a_{21} $$\n3×3 (Sarrus 법칙) $$ \\det(A) = [a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}] - [a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33}] $$\nSarrus 법칙은 $n = 4$ 이상에서는 성립하지 않는다.\n주요 성질:\n$$ \\det A = \\det A^\\top, \\qquad \\det(AB) = \\det(A)\\det(B), \\qquad \\det(\\lambda A) = \\lambda^n \\det(A) $$\n# det(A) = 0이 되는 λ 찾기 # A = [[λ+1, 2, -2], [-4, λ-3, 4], [0, 2, λ-1]] # det = (λ+1)(λ-1)(λ-3) = 0 → λ = 1, -1, 3 lambdas = np.linspace(-2, 4, 500) dets = [np.linalg.det(np.array([[l+1, 2, -2], [-4, l-3, 4], [0, 2, l-1]])) for l in lambdas] 9. 직교행렬의 함수적 성질 (정리 5.18) $A : \\mathbb{R}^n \\to \\mathbb{R}^n$ 일 때 다음 세 성질은 동치이다:\n$A$는 직교행렬이다. $|A\\boldsymbol{x}| = |\\boldsymbol{x}|$ (크기 보존) $\\langle A\\boldsymbol{x}, A\\boldsymbol{y} \\rangle = \\langle \\boldsymbol{x}, \\boldsymbol{y} \\rangle$ (내적 보존) 직교행렬은 두 벡터 사이의 각을 보존한다.\ntheta_rot = np.pi / 3 Q = np.array([[np.cos(theta_rot), -np.sin(theta_rot)], [np.sin(theta_rot), np.cos(theta_rot)]]) x = np.array([2.0, 1.0]) y = np.array([0.5, 2.0]) Qx, Qy = Q @ x, Q @ y print(\"길이 보존:\", np.allclose(np.linalg.norm(x), np.linalg.norm(Qx))) 10. 신경망에서의 선형 변환 응용 입력벡터 $\\boldsymbol{x}$, 가중치 행렬 $W$, 편향벡터 $\\boldsymbol{b}$가 주어질 때:\n$$ \\boldsymbol{u} = W \\cdot \\boldsymbol{x} + \\boldsymbol{b} $$\ndef relu(x): return np.maximum(0, x) def sigmoid(x): return 1 / (1 + np.exp(-x)) n_in, n_hidden, n_out = 4, 6, 3 x = np.array([1.0, -0.5, 0.8, -1.2]) W1 = np.random.randn(n_hidden, n_in) * 0.5 b1 = np.zeros(n_hidden) W2 = np.random.randn(n_out, n_hidden) * 0.5 b2 = np.zeros(n_out) # Forward pass z1 = W1 @ x + b1 a1 = relu(z1) z2 = W2 @ a1 + b2 output = sigmoid(z2) 핵심 요약 개념 정의/공식 핵심 포인트 행렬의 3가지 관점 확장·함수·변형 목적에 따라 관점 전환 Frobenius Norm $|A|F = (\\sum a{ij}^2)^{1/2}$ 행렬 = 벡터처럼 크기 측정 전치행렬 $A^\\top=(a_{ji})$ $(AB)^\\top=B^\\top A^\\top$ (순서 반전!) 직교행렬 $A^\\top A = I$ $A^\\top = A^{-1}$, 회전·대칭 변환 역행렬 $AA^{-1}=I$ $\\det A \\neq 0$ iff 역행렬 존재 선형변환 $A(x+y)=Ax+Ay$ 행렬 = 두 벡터공간 사이 함수 Rank 일차독립인 행/열벡터 수 $n = \\dim N(A) + \\text{rank},A$ 행렬식 $\\det A$ $\\det A = 0 \\Leftrightarrow$ 역행렬 존재 X ",
+  "wordCount" : "853",
+  "inLanguage": "en",
+  "datePublished": "2026-07-02T00:00:00Z",
+  "dateModified": "2026-07-02T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yoonseo8000000-alt.github.io/posts/2026-07-02-linear-transformation/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yoonseo blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yoonseo8000000-alt.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://yoonseo8000000-alt.github.io/" accesskey="h" title="yoonseo blog (Alt + H)">yoonseo blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://yoonseo8000000-alt.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yoonseo8000000-alt.github.io/bookbot/" title="Bookbot">
+                    <span>Bookbot</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      머신러닝을 위한 선형대수학 02. 선형 변환 (Linear Transformation)
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-07-02 00:00:00 +0000 UTC'>2026년 7월 2일</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><h2 id="목차">목차<a hidden class="anchor" aria-hidden="true" href="#목차">#</a></h2>
+<ol>
+<li>행렬을 보는 3가지 관점</li>
+<li>벡터공간으로써의 행렬 연산</li>
+<li>행렬의 크기 — Frobenius Norm</li>
+<li>특수 행렬 (대각, 단위, 대칭, 직교행렬)</li>
+<li>역행렬</li>
+<li>선형변환</li>
+<li>행렬의 Rank</li>
+<li>행렬식 (Determinant)</li>
+<li>직교행렬의 함수적 성질</li>
+<li>신경망에서의 선형 변환 응용</li>
+</ol>
+<hr>
+<h2 id="1-행렬을-보는-3가지-관점">1. 행렬을 보는 3가지 관점<a hidden class="anchor" aria-hidden="true" href="#1-행렬을-보는-3가지-관점">#</a></h2>
+<p>행렬은 크게 <strong>3가지 관점</strong>으로 바라볼 수 있다.</p>
+<h3 id="관점-1--벡터공간의-확장">관점 1 — 벡터공간의 확장<a hidden class="anchor" aria-hidden="true" href="#관점-1--벡터공간의-확장">#</a></h3>
+<p>벡터는 행 또는 열로 배치된 숫자 묶음이며, 크기가 같은 벡터끼리만 연산이 가능하다.
+행렬은 이 개념을 2차원으로 확장한 것이다.</p>
+<p>$$
+A = \begin{pmatrix} 1 &amp; 2 &amp; -1 \ 3 &amp; 2 &amp; -1 \end{pmatrix}, \quad
+B = \begin{pmatrix} 3 &amp; 5 &amp; -7 \ 0 &amp; 4 &amp; 1 \end{pmatrix}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>]])
+</span></span><span style="display:flex;"><span>k <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;A + B =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>A <span style="color:#f92672">+</span> B<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>k<span style="color:#e6db74">}</span><span style="color:#e6db74">A =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>k <span style="color:#f92672">*</span> A<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><img alt="행렬 덧셈 시각화" loading="lazy" src="/images/vector-space/01-matrix-addition.png"></p>
+<hr>
+<h2 id="2-벡터공간으로써의-행렬-연산-정리-51">2. 벡터공간으로써의 행렬 연산 (정리 5.1)<a hidden class="anchor" aria-hidden="true" href="#2-벡터공간으로써의-행렬-연산-정리-51">#</a></h2>
+<p>$A = (a_{ij}),\ B = (b_{ij}) \in M_{m \times n},\ k \in \mathbb{R}$ 일 때:</p>
+<ul>
+<li><strong>덧셈:</strong> $A + B = (a_{ij} + b_{ij})$</li>
+<li><strong>스칼라 곱:</strong> $kA = (ka_{ij})$</li>
+</ul>
+<table>
+	<thead>
+			<tr>
+					<th>법칙</th>
+					<th>식</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>교환법칙</td>
+					<td>$A + B = B + A$</td>
+			</tr>
+			<tr>
+					<td>결합법칙</td>
+					<td>$(A+B)+C = A+(B+C)$</td>
+			</tr>
+			<tr>
+					<td>항등원</td>
+					<td>$A + \mathbf{0} = A$</td>
+			</tr>
+			<tr>
+					<td>역원</td>
+					<td>$A + (-A) = \mathbf{0}$</td>
+			</tr>
+	</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rng <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>default_rng(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">=</span> rng<span style="color:#f92672">.</span>integers(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>astype(float)
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> rng<span style="color:#f92672">.</span>integers(<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>))<span style="color:#f92672">.</span>astype(float)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;교환법칙:&#34;</span>, np<span style="color:#f92672">.</span>allclose(A <span style="color:#f92672">+</span> B, B <span style="color:#f92672">+</span> A))
+</span></span></code></pre></div><hr>
+<h2 id="3-행렬의-크기--frobenius-norm">3. 행렬의 크기 — Frobenius Norm<a hidden class="anchor" aria-hidden="true" href="#3-행렬의-크기--frobenius-norm">#</a></h2>
+<p>행렬도 하나의 벡터이므로 <strong>벡터처럼 크기</strong>를 정의할 수 있다.</p>
+<p>$$
+|A|<em>F = \left(\sum</em>{i=1}^{m}\sum_{j=1}^{n} a_{ij}^2\right)^{\frac{1}{2}}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>frob_manual <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sqrt(np<span style="color:#f92672">.</span>sum(A<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span>frob_numpy <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(A, <span style="color:#e6db74">&#39;fro&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;||A||_F = </span><span style="color:#e6db74">{</span>frob_manual<span style="color:#e6db74">:</span><span style="color:#e6db74">.6f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><img alt="Frobenius Norm 비교" loading="lazy" src="/images/vector-space/02-frobenius-norm.png"></p>
+<hr>
+<h2 id="4-특수-행렬">4. 특수 행렬<a hidden class="anchor" aria-hidden="true" href="#4-특수-행렬">#</a></h2>
+<h3 id="전치행렬-정의-53">전치행렬 (정의 5.3)<a hidden class="anchor" aria-hidden="true" href="#전치행렬-정의-53">#</a></h3>
+<p>$(i,j)$ 성분을 $(j,i)$ 성분으로 바꾼 행렬. 연산법칙:</p>
+<p>$$
+(AB)^\top = B^\top A^\top
+$$</p>
+<blockquote>
+<p>⚠️ 순서가 바뀐다는 점에 주의!</p>
+</blockquote>
+<h3 id="대각행렬--단위행렬--대칭행렬--직교행렬">대각행렬 / 단위행렬 / 대칭행렬 / 직교행렬<a hidden class="anchor" aria-hidden="true" href="#대각행렬--단위행렬--대칭행렬--직교행렬">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>I3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>eye(<span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>D  <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>diag([<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>])
+</span></span><span style="display:flex;"><span>S  <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>]])  <span style="color:#75715e"># 대칭</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>theta <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">/</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[np<span style="color:#f92672">.</span>cos(theta), <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(theta)],
+</span></span><span style="display:flex;"><span>              [np<span style="color:#f92672">.</span>sin(theta),  np<span style="color:#f92672">.</span>cos(theta)]])  <span style="color:#75715e"># 직교 (회전)</span>
+</span></span></code></pre></div><p><img alt="특수 행렬 한눈에 보기" loading="lazy" src="/images/vector-space/03-special-matrices.png"></p>
+<hr>
+<h2 id="5-역행렬-정리-57">5. 역행렬 (정리 5.7)<a hidden class="anchor" aria-hidden="true" href="#5-역행렬-정리-57">#</a></h2>
+<p>$A, B$가 정칙행렬일 때:</p>
+<table>
+	<thead>
+			<tr>
+					<th>성질</th>
+					<th>식</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>곱의 역행렬</td>
+					<td>$(AB)^{-1} = B^{-1}A^{-1}$</td>
+			</tr>
+			<tr>
+					<td>스칼라 곱</td>
+					<td>$(kA)^{-1} = \frac{1}{k}A^{-1}$</td>
+			</tr>
+			<tr>
+					<td>전치의 역</td>
+					<td>$(A^\top)^{-1} = (A^{-1})^\top$</td>
+			</tr>
+	</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>A_inv <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(A)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;A @ A⁻¹ =</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">{</span>np<span style="color:#f92672">.</span>round(A <span style="color:#f92672">@</span> A_inv, <span style="color:#ae81ff">10</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;(AB)⁻¹ = B⁻¹A⁻¹?&#34;</span>, np<span style="color:#f92672">.</span>allclose(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(A<span style="color:#a6e22e">@B</span>), np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(B) <span style="color:#f92672">@</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>inv(A)))
+</span></span></code></pre></div><p><img alt="역행렬 검증" loading="lazy" src="/images/vector-space/04-inverse-matrix.png"></p>
+<hr>
+<h2 id="6-선형변환-linear-transformation">6. 선형변환 (Linear Transformation)<a hidden class="anchor" aria-hidden="true" href="#6-선형변환-linear-transformation">#</a></h2>
+<p>$m \times n$ 행렬 $A$는 벡터공간 $\mathbb{R}^n$에서 $\mathbb{R}^m$으로의 <strong>함수</strong>이며, 다음 선형법칙을 만족한다:</p>
+<p>$$
+A(\boldsymbol{x}+\boldsymbol{y}) = A\boldsymbol{x} + A\boldsymbol{y}, \qquad
+A(\lambda\boldsymbol{x}) = \lambda A\boldsymbol{x}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># 단위원을 변환하는 3가지 예시</span>
+</span></span><span style="display:flex;"><span>transforms <span style="color:#f92672">=</span> [
+</span></span><span style="display:flex;"><span>    (np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]),    <span style="color:#e6db74">&#39;스케일링 (x축 2배)&#39;</span>),
+</span></span><span style="display:flex;"><span>    (np<span style="color:#f92672">.</span>array([[np<span style="color:#f92672">.</span>cos(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>), <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)],
+</span></span><span style="display:flex;"><span>               [np<span style="color:#f92672">.</span>sin(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>),  np<span style="color:#f92672">.</span>cos(np<span style="color:#f92672">.</span>pi<span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>)]]), <span style="color:#e6db74">&#39;회전 (60°)&#39;</span>),
+</span></span><span style="display:flex;"><span>    (np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]]),    <span style="color:#e6db74">&#39;전단 변환 (Shear)&#39;</span>),
+</span></span><span style="display:flex;"><span>]
+</span></span></code></pre></div><p><img alt="선형변환 단위원 변환" loading="lazy" src="/images/vector-space/05-linear-transform-circle.png"></p>
+<hr>
+<h2 id="7-행렬의-rank">7. 행렬의 Rank<a hidden class="anchor" aria-hidden="true" href="#7-행렬의-rank">#</a></h2>
+<p>$m \times n$ 행렬 $A$에서 행벡터(또는 열벡터) 중 <strong>일차독립인 벡터의 최대 개수</strong>.</p>
+<p>$$
+n = \dim{\boldsymbol{x} \in \mathbb{R}^n \mid A\boldsymbol{x} = \boldsymbol{0}} + \text{rank},A
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;rank(A) = </span><span style="color:#e6db74">{</span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(A)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">8</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">7</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;det(B) = </span><span style="color:#e6db74">{</span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>det(B)<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;rank(B) = </span><span style="color:#e6db74">{</span>np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>matrix_rank(B)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p><img alt="행렬의 Rank 비교" loading="lazy" src="/images/vector-space/06-rank-comparison.png"></p>
+<hr>
+<h2 id="8-행렬식-determinant">8. 행렬식 (Determinant)<a hidden class="anchor" aria-hidden="true" href="#8-행렬식-determinant">#</a></h2>
+<h3 id="22">2×2<a hidden class="anchor" aria-hidden="true" href="#22">#</a></h3>
+<p>$$
+\det(A) = a_{11}a_{22} - a_{12}a_{21}
+$$</p>
+<h3 id="33-sarrus-법칙">3×3 (Sarrus 법칙)<a hidden class="anchor" aria-hidden="true" href="#33-sarrus-법칙">#</a></h3>
+<p>$$
+\det(A) = [a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}] - [a_{13}a_{22}a_{31} + a_{11}a_{23}a_{32} + a_{12}a_{21}a_{33}]
+$$</p>
+<blockquote>
+<p>Sarrus 법칙은 $n = 4$ 이상에서는 성립하지 않는다.</p>
+</blockquote>
+<p><strong>주요 성질:</strong></p>
+<p>$$
+\det A = \det A^\top, \qquad
+\det(AB) = \det(A)\det(B), \qquad
+\det(\lambda A) = \lambda^n \det(A)
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># det(A) = 0이 되는 λ 찾기</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A = [[λ+1, 2, -2], [-4, λ-3, 4], [0, 2, λ-1]]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># det = (λ+1)(λ-1)(λ-3) = 0 → λ = 1, -1, 3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lambdas <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linspace(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">500</span>)
+</span></span><span style="display:flex;"><span>dets <span style="color:#f92672">=</span> [np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>det(np<span style="color:#f92672">.</span>array([[l<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>], [<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>, l<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, l<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]])) <span style="color:#66d9ef">for</span> l <span style="color:#f92672">in</span> lambdas]
+</span></span></code></pre></div><p><img alt="행렬식 시각화" loading="lazy" src="/images/vector-space/07-determinant.png"></p>
+<hr>
+<h2 id="9-직교행렬의-함수적-성질-정리-518">9. 직교행렬의 함수적 성질 (정리 5.18)<a hidden class="anchor" aria-hidden="true" href="#9-직교행렬의-함수적-성질-정리-518">#</a></h2>
+<p>$A : \mathbb{R}^n \to \mathbb{R}^n$ 일 때 다음 세 성질은 <strong>동치</strong>이다:</p>
+<ol>
+<li>$A$는 직교행렬이다.</li>
+<li>$|A\boldsymbol{x}| = |\boldsymbol{x}|$ (크기 보존)</li>
+<li>$\langle A\boldsymbol{x}, A\boldsymbol{y} \rangle = \langle \boldsymbol{x}, \boldsymbol{y} \rangle$ (내적 보존)</li>
+</ol>
+<p>직교행렬은 <strong>두 벡터 사이의 각을 보존</strong>한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>theta_rot <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>pi <span style="color:#f92672">/</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>Q <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[np<span style="color:#f92672">.</span>cos(theta_rot), <span style="color:#f92672">-</span>np<span style="color:#f92672">.</span>sin(theta_rot)],
+</span></span><span style="display:flex;"><span>              [np<span style="color:#f92672">.</span>sin(theta_rot),  np<span style="color:#f92672">.</span>cos(theta_rot)]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">2.0</span>, <span style="color:#ae81ff">1.0</span>])
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">2.0</span>])
+</span></span><span style="display:flex;"><span>Qx, Qy <span style="color:#f92672">=</span> Q <span style="color:#f92672">@</span> x, Q <span style="color:#f92672">@</span> y
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;길이 보존:&#34;</span>, np<span style="color:#f92672">.</span>allclose(np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(x), np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>norm(Qx)))
+</span></span></code></pre></div><p><img alt="직교행렬 성질 시각화" loading="lazy" src="/images/vector-space/08-orthogonal-matrix.png"></p>
+<hr>
+<h2 id="10-신경망에서의-선형-변환-응용">10. 신경망에서의 선형 변환 응용<a hidden class="anchor" aria-hidden="true" href="#10-신경망에서의-선형-변환-응용">#</a></h2>
+<p>입력벡터 $\boldsymbol{x}$, 가중치 행렬 $W$, 편향벡터 $\boldsymbol{b}$가 주어질 때:</p>
+<p>$$
+\boldsymbol{u} = W \cdot \boldsymbol{x} + \boldsymbol{b}
+$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">relu</span>(x): <span style="color:#66d9ef">return</span> np<span style="color:#f92672">.</span>maximum(<span style="color:#ae81ff">0</span>, x)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sigmoid</span>(x): <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>exp(<span style="color:#f92672">-</span>x))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n_in, n_hidden, n_out <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1.0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0.8</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1.2</span>])
+</span></span><span style="display:flex;"><span>W1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_hidden, n_in) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span>b1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(n_hidden)
+</span></span><span style="display:flex;"><span>W2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(n_out, n_hidden) <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span>b2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros(n_out)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Forward pass</span>
+</span></span><span style="display:flex;"><span>z1 <span style="color:#f92672">=</span> W1 <span style="color:#f92672">@</span> x <span style="color:#f92672">+</span> b1
+</span></span><span style="display:flex;"><span>a1 <span style="color:#f92672">=</span> relu(z1)
+</span></span><span style="display:flex;"><span>z2 <span style="color:#f92672">=</span> W2 <span style="color:#f92672">@</span> a1 <span style="color:#f92672">+</span> b2
+</span></span><span style="display:flex;"><span>output <span style="color:#f92672">=</span> sigmoid(z2)
+</span></span></code></pre></div><p><img alt="신경망 선형변환 시뮬레이션" loading="lazy" src="/images/vector-space/09-neural-network.png"></p>
+<hr>
+<h2 id="핵심-요약">핵심 요약<a hidden class="anchor" aria-hidden="true" href="#핵심-요약">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>개념</th>
+					<th>정의/공식</th>
+					<th>핵심 포인트</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>행렬의 3가지 관점</td>
+					<td>확장·함수·변형</td>
+					<td>목적에 따라 관점 전환</td>
+			</tr>
+			<tr>
+					<td>Frobenius Norm</td>
+					<td>$|A|<em>F = (\sum a</em>{ij}^2)^{1/2}$</td>
+					<td>행렬 = 벡터처럼 크기 측정</td>
+			</tr>
+			<tr>
+					<td>전치행렬</td>
+					<td>$A^\top=(a_{ji})$</td>
+					<td>$(AB)^\top=B^\top A^\top$ (순서 반전!)</td>
+			</tr>
+			<tr>
+					<td>직교행렬</td>
+					<td>$A^\top A = I$</td>
+					<td>$A^\top = A^{-1}$, 회전·대칭 변환</td>
+			</tr>
+			<tr>
+					<td>역행렬</td>
+					<td>$AA^{-1}=I$</td>
+					<td>$\det A \neq 0$ iff 역행렬 존재</td>
+			</tr>
+			<tr>
+					<td>선형변환</td>
+					<td>$A(x+y)=Ax+Ay$</td>
+					<td>행렬 = 두 벡터공간 사이 함수</td>
+			</tr>
+			<tr>
+					<td>Rank</td>
+					<td>일차독립인 행/열벡터 수</td>
+					<td>$n = \dim N(A) + \text{rank},A$</td>
+			</tr>
+			<tr>
+					<td>행렬식</td>
+					<td>$\det A$</td>
+					<td>$\det A = 0 \Leftrightarrow$ 역행렬 존재 X</td>
+			</tr>
+	</tbody>
+</table>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98/">선형대수</a></li>
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/">머신러닝</a></li>
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/">이어드림스쿨</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://yoonseo8000000-alt.github.io/">yoonseo blog</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
