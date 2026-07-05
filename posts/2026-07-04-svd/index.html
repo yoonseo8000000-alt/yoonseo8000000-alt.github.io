@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>특이값 분해 (Singular Value Decomposition, SVD) | yoonseo blog</title>
+<meta name="keywords" content="선형대수, 머신러닝, 이어드림스쿨">
+<meta name="description" content="Overview
+머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.
+목차
+
+특이값 분해 예제
+특이값 분해 이론
+SVD의 머신러닝에서의 응용: 영상압축
+
+
+1. 특이값 분해 예제
+Positive Semidefinite Matrix (PSDM)
+대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.
+임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:">
+<meta name="author" content="">
+<link rel="canonical" href="https://yoonseo8000000-alt.github.io/posts/2026-07-04-svd/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.cd9298b33628769aa1bc1acebbbfd7aa11ce81dfe03484d479e1907760249a1d.css" integrity="sha256-zZKYszYodpqhvBrOu7/XqhHOgd/gNITUeeGQd2Akmh0=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://yoonseo8000000-alt.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://yoonseo8000000-alt.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yoonseo8000000-alt.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://yoonseo8000000-alt.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://yoonseo8000000-alt.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="https://yoonseo8000000-alt.github.io/posts/2026-07-04-svd/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1HQS37SS0"></script>
+      <script>
+        var doNotTrack = false;
+        if ( true ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-L1HQS37SS0');
+        }
+      </script><meta property="og:url" content="https://yoonseo8000000-alt.github.io/posts/2026-07-04-svd/">
+  <meta property="og:site_name" content="yoonseo blog">
+  <meta property="og:title" content="특이값 분해 (Singular Value Decomposition, SVD)">
+  <meta property="og:description" content="Overview 머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.
+목차
+특이값 분해 예제 특이값 분해 이론 SVD의 머신러닝에서의 응용: 영상압축 1. 특이값 분해 예제 Positive Semidefinite Matrix (PSDM) 대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.
+임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:">
+  <meta property="og:locale" content="ko_kr">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-04T00:00:00+00:00">
+    <meta property="article:tag" content="선형대수">
+    <meta property="article:tag" content="머신러닝">
+    <meta property="article:tag" content="이어드림스쿨">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="특이값 분해 (Singular Value Decomposition, SVD)">
+  <meta name="twitter:description" content="Overview 머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.
+목차
+특이값 분해 예제 특이값 분해 이론 SVD의 머신러닝에서의 응용: 영상압축 1. 특이값 분해 예제 Positive Semidefinite Matrix (PSDM) 대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.
+임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://yoonseo8000000-alt.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "특이값 분해 (Singular Value Decomposition, SVD)",
+      "item": "https://yoonseo8000000-alt.github.io/posts/2026-07-04-svd/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "특이값 분해 (Singular Value Decomposition, SVD)",
+  "name": "특이값 분해 (Singular Value Decomposition, SVD)",
+  "description": "Overview 머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \\times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.\n목차\n특이값 분해 예제 특이값 분해 이론 SVD의 머신러닝에서의 응용: 영상압축 1. 특이값 분해 예제 Positive Semidefinite Matrix (PSDM) 대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \\geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.\n임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:\n",
+  "keywords": [
+    "선형대수", "머신러닝", "이어드림스쿨"
+  ],
+  "articleBody": "Overview 머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \\times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.\n목차\n특이값 분해 예제 특이값 분해 이론 SVD의 머신러닝에서의 응용: 영상압축 1. 특이값 분해 예제 Positive Semidefinite Matrix (PSDM) 대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \\geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.\n임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:\n$$x^TA^TAx = (Ax)^T(Ax) \\geq 0, \\qquad x^TAA^Tx = (A^Tx)^T(A^Tx) \\geq 0$$\n$n \\times n$ 행렬 $A$에 대해 다음 네 명제는 동치다.\n$A$가 양의 준정부호 행렬이다 $A$의 모든 eigenvalue는 음의 실수가 아니다 행렬 $U$가 존재해서 $A = U^TU$이다 $A$의 모든 sub-determinant는 음의 실수가 아니다 또한 대칭행렬의 서로 다른 고윳값에 대응하는 고유벡터는 서로 직교하고 ($v_1 \\cdot v_2 = 0$), 정규직교행렬 $Q$로 $A = Q^TDQ$ 형태로 대각화할 수 있다.\n예제 1: $A = \\begin{pmatrix} 1 \u0026 1 \u0026 0 \\ 0 \u0026 0 \u0026 1 \\end{pmatrix}$ $A^TA$의 고윳값을 구하고($\\lambda = 2, 1, 0$), 각 고유벡터 $v_i$에 대해 $u_i = \\frac{1}{\\sqrt{\\lambda_i}}Av_i$로 $U$를 구성하면:\n$$U^TAV = \\begin{pmatrix}\\sqrt{2}\u00260\u00260\\0\u00261\u00260\\end{pmatrix}$$\nA1 = np.array([[1, 1, 0], [0, 0, 1]], dtype=float) # A^T A 계산 (대칭, 고유값 = σ²) AtA = A1.T @ A1 eigvals, eigvecs = np.linalg.eigh(AtA) # eigh: 대칭행렬 전용 idx = np.argsort(eigvals)[::-1] # 내림차순 정렬 eigvals, eigvecs = eigvals[idx], eigvecs[:, idx] # numpy SVD로 검증 U, S, Vt = np.linalg.svd(A1, full_matrices=True) # 복원 검증: U Λ V^T = A Lambda = np.zeros((U.shape[0], Vt.shape[0])) for i, s in enumerate(S): Lambda[i, i] = s A_reconstructed = U @ Lambda @ Vt print('원래 A와 일치:', np.allclose(A1, A_reconstructed)) # True 예제 2: $B = \\begin{pmatrix}1\u00261\\1\u00260\\0\u00261\\end{pmatrix}$ $B^TB$의 고윳값은 $\\lambda = 3, 1$이고, $u_1, u_2$는 $u_i = \\frac{1}{\\sqrt{\\lambda_i}}Bv_i$로, $u_3$는 $u_1 \\times u_2$(벡터곱)로 구한다:\n$$U^TBV = \\begin{pmatrix}\\sqrt{3}\u00260\\0\u00261\\0\u00260\\end{pmatrix}$$\nB = np.array([[1, 1], [1, 0], [0, 1]], dtype=float) U2, S2, Vt2 = np.linalg.svd(B, full_matrices=True) # Σ: m×n 대각 (특이값) Sigma2 = np.zeros((3, 2)) for i, s in enumerate(S2): Sigma2[i, i] = s result = U2.T @ B @ Vt2.T # 대각행렬 Σ와 일치해야 함 예제 3: $A = \\begin{pmatrix}4\u00260\\3\u0026-5\\end{pmatrix}$ $A^TA = \\begin{pmatrix}25\u0026-15\\-15\u002625\\end{pmatrix}$의 특성방정식을 풀면 $\\lambda = 40, 10$, 특이값은 $\\sigma_1=\\sqrt{40}=2\\sqrt{10}$, $\\sigma_2=\\sqrt{10}$이다.\nA3 = np.array([[4, 0], [3, -5]], dtype=float) U3, S3, Vt3 = np.linalg.svd(A3) result3 = U3.T @ A3 @ Vt3.T print('일치 여부:', np.allclose(result3, np.diag(S3))) # True 세 예제의 특이값 크기를 비교하면 아래와 같다.\n2. 특이값 분해 이론 SVD 정의: $m \\times n$ 행렬 $A$는 다음과 같이 분해된다.\n$$A = U\\Lambda V^T$$\n기호 크기 성질 $U$ $m \\times m$ 직교행렬: $UU^T = U^TU = I$ $\\Lambda$ $m \\times n$ 대각행렬 $V$ $n \\times n$ 직교행렬: $VV^T = V^TV = I$ $p = \\min(m,n)$일 때 $\\Sigma = \\text{diag}(\\sigma_1, \\ldots, \\sigma_p)$이고 $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq \\sigma_p \\geq 0$을 특이값이라 한다.\n핵심 관계: $A = U\\Lambda V^T$이면\n$$A^TA = V\\Lambda^TU^TU\\Lambda V^T = V\\Lambda^T\\Lambda V^T$$\n즉 $\\Lambda_1 = \\Lambda^T\\Lambda = \\text{diag}(\\sigma_1^2, \\ldots, \\sigma_n^2)$이라 하면 $(A^TA)V = V\\Lambda_1$이 성립하므로:\n$V$의 열벡터들은 $A^TA$의 고유벡터 (우 특이벡터), $\\sigma_i^2$이 그 고윳값 $U$의 열벡터들은 $AA^T$의 고유벡터 (좌 특이벡터) A_demo = np.array([[9.5, 1.4, 7, 0.3], [4, 4, 9, 8], [8, 9.1, 6.5, 9.3]]) U_d, S_d, Vt_d = np.linalg.svd(A_demo, full_matrices=True) # V의 열벡터 = A^T A 고유벡터 검증 AtA_demo = A_demo.T @ A_demo eigvals_d, eigvecs_d = np.linalg.eigh(AtA_demo) idx_d = np.argsort(eigvals_d)[::-1] eigvals_d = eigvals_d[idx_d] print('일치 여부:', np.allclose(eigvals_d[:len(S_d)], S_d**2, atol=1e-6)) # True $A = U\\Lambda V^T$로 분해된 각 행렬을 직접 시각화하면 다음과 같다.\n3. SVD의 머신러닝에서의 응용: 영상압축 rank-1 행렬은 두 벡터의 외적으로 표현된다: $A = uv^T$. 예를 들어 $100 \\times 100 = 10000$개 원소를 $2 \\times 100 = 200$개로 표현할 수 있어 차원 축소에 활용된다.\nrank-k 근사: $m \\times n$ 행렬 $A$의 SVD가 $A = U\\Lambda V^T$이고 $\\text{rank}(A) = k$라 하면\n$$A = \\sigma_1u_1v_1^T + \\sigma_2u_2v_2^T + \\cdots + \\sigma_ku_kv_k^T$$\n특이값이 빠르게 감소하는 경우, 상위 몇 개($\\sigma_1, \\sigma_2$)만으로도 원본을 근사할 수 있다.\ndef svd_approx(A, k): \"\"\"상위 k개 특이값만 사용한 rank-k 근사\"\"\" U, S, Vt = np.linalg.svd(A, full_matrices=False) return sum(S[i] * np.outer(U[:, i], Vt[i, :]) for i in range(k)) A_comp = np.array([[3, 1, 4, 1], [5, 9, 2, 6], [5, 3, 5, 8], [9, 9, 9, 3]], dtype=float) U_c, S_c, Vt_c = np.linalg.svd(A_comp) print('σ₁ + σ₂가 전체의', round((S_c[0]+S_c[1])/S_c.sum()*100, 1), '% 차지') 4x4 행렬을 rank-1부터 rank-4까지 근사했을 때, 근사에 사용하는 특이값 개수가 늘어날수록 원본에 가까워지고 Frobenius 오차가 줄어든다.\n실제 영상 압축 예시: 203×233 크기 흑백영상($\\text{rank}=5$)을 5개 특이값만으로 압축하면, 원본 저장 공간 $203\\times233=47299$가 $5\\times(203+233)=2180$이 되어 약 21.7배 압축이 가능하다.\n13×13 픽셀 하트 이미지로 직접 실습해보면, rank 수가 늘어날수록 압축 원소 수는 늘지만 화질이 원본에 가까워지는 트레이드오프를 확인할 수 있다.\nU_h, S_h, Vt_h = np.linalg.svd(heart, full_matrices=False) for k in [1, 2, 3, 4, 5]: Hk = svd_approx(heart, k) compressed = k * (heart.shape[0] + heart.shape[1]) # rank가 커질수록 compressed/원본 크기 비율도 커짐 압축률과 화질(Frobenius 오차, 누적 에너지)의 관계를 그래프로 보면, 적은 수의 특이값만으로도 대부분의 정보(에너지)를 보존할 수 있다는 걸 확인할 수 있다.\n핵심 요약 개념 정의 핵심 포인트 PSDM $x^TAx \\geq 0$ $A^TA$, $AA^T$는 항상 PSDM SVD $A = U\\Lambda V^T$ 모든 $m \\times n$ 행렬에 적용 가능 특이값 $\\sigma_i = \\sqrt{\\lambda_i(A^TA)}$ $\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0$ V의 열벡터 $A^TA$의 고유벡터 우 특이벡터 U의 열벡터 $AA^T$의 고유벡터 좌 특이벡터 rank-k 근사 $A_k = \\sum_{i=1}^k \\sigma_iu_iv_i^T$ 상위 k개 특이값으로 근사 영상 압축 $k(m+n) \\ll mn$ 특이값이 빠르게 감소할수록 효율적 머신러닝과의 연결 PCA (주성분 분석): 공분산 행렬의 SVD → 분산이 큰 방향으로 차원 축소 잠재 의미 분석 (LSA): 텍스트 행렬의 SVD → 문서-단어 관계 분석 추천 시스템: 사용자-아이템 행렬의 SVD → 잠재 요인 모델 이미지 압축: 픽셀 행렬의 SVD → 상위 특이값만으로 이미지 복원 노이즈 제거: 작은 특이값은 노이즈에 해당 → 제거하면 신호 개선 ",
+  "wordCount" : "910",
+  "inLanguage": "en",
+  "datePublished": "2026-07-04T00:00:00Z",
+  "dateModified": "2026-07-04T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yoonseo8000000-alt.github.io/posts/2026-07-04-svd/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "yoonseo blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yoonseo8000000-alt.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://yoonseo8000000-alt.github.io/" accesskey="h" title="yoonseo blog (Alt + H)">yoonseo blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://yoonseo8000000-alt.github.io/posts/" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://yoonseo8000000-alt.github.io/bookbot/" title="Bookbot">
+                    <span>Bookbot</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      특이값 분해 (Singular Value Decomposition, SVD)
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-07-04 00:00:00 +0000 UTC'>2026년 7월 4일</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><h2 id="overview">Overview<a hidden class="anchor" aria-hidden="true" href="#overview">#</a></h2>
+<p>머신러닝을 위한 선형대수학 04강. 양의 준정부호 행렬(PSDM) 개념을 바탕으로 모든 $m \times n$ 행렬에 적용 가능한 특이값 분해(SVD)를 정의하고, 세 가지 예제로 직접 계산해본 뒤, SVD를 이용한 rank-k 근사와 영상 압축까지 정리한다.</p>
+<p><strong>목차</strong></p>
+<ol>
+<li>특이값 분해 예제</li>
+<li>특이값 분해 이론</li>
+<li>SVD의 머신러닝에서의 응용: 영상압축</li>
+</ol>
+<hr>
+<h2 id="1-특이값-분해-예제">1. 특이값 분해 예제<a hidden class="anchor" aria-hidden="true" href="#1-특이값-분해-예제">#</a></h2>
+<h3 id="positive-semidefinite-matrix-psdm">Positive Semidefinite Matrix (PSDM)<a hidden class="anchor" aria-hidden="true" href="#positive-semidefinite-matrix-psdm">#</a></h3>
+<p>대칭행렬 $A$ ($A^T = A$)가 모든 벡터 $x$에 대하여 $x^TAx \geq 0$이면 $A$를 **양의 준정부호 행렬(PSDM)**이라 한다.</p>
+<p><strong>임의의 행렬 $A$에 대해 $A^TA$, $AA^T$는 항상 PSDM이다:</strong></p>
+<p>$$x^TA^TAx = (Ax)^T(Ax) \geq 0, \qquad x^TAA^Tx = (A^Tx)^T(A^Tx) \geq 0$$</p>
+<p>$n \times n$ 행렬 $A$에 대해 다음 네 명제는 동치다.</p>
+<ol>
+<li>$A$가 양의 준정부호 행렬이다</li>
+<li>$A$의 모든 eigenvalue는 음의 실수가 아니다</li>
+<li>행렬 $U$가 존재해서 $A = U^TU$이다</li>
+<li>$A$의 모든 sub-determinant는 음의 실수가 아니다</li>
+</ol>
+<p>또한 대칭행렬의 서로 다른 고윳값에 대응하는 고유벡터는 서로 직교하고 ($v_1 \cdot v_2 = 0$), 정규직교행렬 $Q$로 $A = Q^TDQ$ 형태로 대각화할 수 있다.</p>
+<h3 id="예제-1-a--beginpmatrix-1--1--0--0--0--1-endpmatrix">예제 1: $A = \begin{pmatrix} 1 &amp; 1 &amp; 0 \ 0 &amp; 0 &amp; 1 \end{pmatrix}$<a hidden class="anchor" aria-hidden="true" href="#예제-1-a--beginpmatrix-1--1--0--0--0--1-endpmatrix">#</a></h3>
+<p>$A^TA$의 고윳값을 구하고($\lambda = 2, 1, 0$), 각 고유벡터 $v_i$에 대해 $u_i = \frac{1}{\sqrt{\lambda_i}}Av_i$로 $U$를 구성하면:</p>
+<p>$$U^TAV = \begin{pmatrix}\sqrt{2}&amp;0&amp;0\0&amp;1&amp;0\end{pmatrix}$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A1 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A^T A 계산 (대칭, 고유값 = σ²)</span>
+</span></span><span style="display:flex;"><span>AtA <span style="color:#f92672">=</span> A1<span style="color:#f92672">.</span>T <span style="color:#f92672">@</span> A1
+</span></span><span style="display:flex;"><span>eigvals, eigvecs <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>eigh(AtA)  <span style="color:#75715e"># eigh: 대칭행렬 전용</span>
+</span></span><span style="display:flex;"><span>idx <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argsort(eigvals)[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]         <span style="color:#75715e"># 내림차순 정렬</span>
+</span></span><span style="display:flex;"><span>eigvals, eigvecs <span style="color:#f92672">=</span> eigvals[idx], eigvecs[:, idx]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># numpy SVD로 검증</span>
+</span></span><span style="display:flex;"><span>U, S, Vt <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(A1, full_matrices<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 복원 검증: U Λ V^T = A</span>
+</span></span><span style="display:flex;"><span>Lambda <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((U<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], Vt<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, s <span style="color:#f92672">in</span> enumerate(S):
+</span></span><span style="display:flex;"><span>    Lambda[i, i] <span style="color:#f92672">=</span> s
+</span></span><span style="display:flex;"><span>A_reconstructed <span style="color:#f92672">=</span> U <span style="color:#f92672">@</span> Lambda <span style="color:#f92672">@</span> Vt
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;원래 A와 일치:&#39;</span>, np<span style="color:#f92672">.</span>allclose(A1, A_reconstructed))  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div><h3 id="예제-2-b--beginpmatrix111001endpmatrix">예제 2: $B = \begin{pmatrix}1&amp;1\1&amp;0\0&amp;1\end{pmatrix}$<a hidden class="anchor" aria-hidden="true" href="#예제-2-b--beginpmatrix111001endpmatrix">#</a></h3>
+<p>$B^TB$의 고윳값은 $\lambda = 3, 1$이고, $u_1, u_2$는 $u_i = \frac{1}{\sqrt{\lambda_i}}Bv_i$로, $u_3$는 $u_1 \times u_2$(벡터곱)로 구한다:</p>
+<p>$$U^TBV = \begin{pmatrix}\sqrt{3}&amp;0\0&amp;1\0&amp;0\end{pmatrix}$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>U2, S2, Vt2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(B, full_matrices<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Σ: m×n 대각 (특이값)</span>
+</span></span><span style="display:flex;"><span>Sigma2 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>zeros((<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i, s <span style="color:#f92672">in</span> enumerate(S2):
+</span></span><span style="display:flex;"><span>    Sigma2[i, i] <span style="color:#f92672">=</span> s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> U2<span style="color:#f92672">.</span>T <span style="color:#f92672">@</span> B <span style="color:#f92672">@</span> Vt2<span style="color:#f92672">.</span>T  <span style="color:#75715e"># 대각행렬 Σ와 일치해야 함</span>
+</span></span></code></pre></div><h3 id="예제-3-a--beginpmatrix403-5endpmatrix">예제 3: $A = \begin{pmatrix}4&amp;0\3&amp;-5\end{pmatrix}$<a hidden class="anchor" aria-hidden="true" href="#예제-3-a--beginpmatrix403-5endpmatrix">#</a></h3>
+<p>$A^TA = \begin{pmatrix}25&amp;-15\-15&amp;25\end{pmatrix}$의 특성방정식을 풀면 $\lambda = 40, 10$, 특이값은 $\sigma_1=\sqrt{40}=2\sqrt{10}$, $\sigma_2=\sqrt{10}$이다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>U3, S3, Vt3 <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(A3)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>result3 <span style="color:#f92672">=</span> U3<span style="color:#f92672">.</span>T <span style="color:#f92672">@</span> A3 <span style="color:#f92672">@</span> Vt3<span style="color:#f92672">.</span>T
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;일치 여부:&#39;</span>, np<span style="color:#f92672">.</span>allclose(result3, np<span style="color:#f92672">.</span>diag(S3)))  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div><p>세 예제의 특이값 크기를 비교하면 아래와 같다.</p>
+<p><img alt="세 예제의 특이값 크기 비교" loading="lazy" src="/images/svd/01_3%EA%B0%80%EC%A7%80_%EC%98%88%EC%A0%9C_%EC%8B%9C%EA%B0%81%ED%99%94_%ED%8A%B9%EC%9D%B4%EA%B0%92_%ED%81%AC%EA%B8%B0_%EB%B9%84%EA%B5%90.png"></p>
+<hr>
+<h2 id="2-특이값-분해-이론">2. 특이값 분해 이론<a hidden class="anchor" aria-hidden="true" href="#2-특이값-분해-이론">#</a></h2>
+<p><strong>SVD 정의</strong>: $m \times n$ 행렬 $A$는 다음과 같이 분해된다.</p>
+<p>$$A = U\Lambda V^T$$</p>
+<table>
+	<thead>
+			<tr>
+					<th>기호</th>
+					<th>크기</th>
+					<th>성질</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$U$</td>
+					<td>$m \times m$</td>
+					<td>직교행렬: $UU^T = U^TU = I$</td>
+			</tr>
+			<tr>
+					<td>$\Lambda$</td>
+					<td>$m \times n$</td>
+					<td>대각행렬</td>
+			</tr>
+			<tr>
+					<td>$V$</td>
+					<td>$n \times n$</td>
+					<td>직교행렬: $VV^T = V^TV = I$</td>
+			</tr>
+	</tbody>
+</table>
+<p>$p = \min(m,n)$일 때 $\Sigma = \text{diag}(\sigma_1, \ldots, \sigma_p)$이고 $\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_p \geq 0$을 <strong>특이값</strong>이라 한다.</p>
+<p><strong>핵심 관계</strong>: $A = U\Lambda V^T$이면</p>
+<p>$$A^TA = V\Lambda^TU^TU\Lambda V^T = V\Lambda^T\Lambda V^T$$</p>
+<p>즉 $\Lambda_1 = \Lambda^T\Lambda = \text{diag}(\sigma_1^2, \ldots, \sigma_n^2)$이라 하면 $(A^TA)V = V\Lambda_1$이 성립하므로:</p>
+<ul>
+<li><strong>$V$의 열벡터들은 $A^TA$의 고유벡터</strong> (우 특이벡터), $\sigma_i^2$이 그 고윳값</li>
+<li><strong>$U$의 열벡터들은 $AA^T$의 고유벡터</strong> (좌 특이벡터)</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>A_demo <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">9.5</span>, <span style="color:#ae81ff">1.4</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">0.3</span>],
+</span></span><span style="display:flex;"><span>                   [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>],
+</span></span><span style="display:flex;"><span>                   [<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9.1</span>, <span style="color:#ae81ff">6.5</span>, <span style="color:#ae81ff">9.3</span>]])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>U_d, S_d, Vt_d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(A_demo, full_matrices<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># V의 열벡터 = A^T A 고유벡터 검증</span>
+</span></span><span style="display:flex;"><span>AtA_demo <span style="color:#f92672">=</span> A_demo<span style="color:#f92672">.</span>T <span style="color:#f92672">@</span> A_demo
+</span></span><span style="display:flex;"><span>eigvals_d, eigvecs_d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>eigh(AtA_demo)
+</span></span><span style="display:flex;"><span>idx_d <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argsort(eigvals_d)[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>eigvals_d <span style="color:#f92672">=</span> eigvals_d[idx_d]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;일치 여부:&#39;</span>, np<span style="color:#f92672">.</span>allclose(eigvals_d[:len(S_d)], S_d<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, atol<span style="color:#f92672">=</span><span style="color:#ae81ff">1e-6</span>))  <span style="color:#75715e"># True</span>
+</span></span></code></pre></div><p>$A = U\Lambda V^T$로 분해된 각 행렬을 직접 시각화하면 다음과 같다.</p>
+<p><img alt="SVD 분해: A = UΛVᵀ" loading="lazy" src="/images/svd/02_SVD_%EA%B5%AC%EC%A1%B0_%EC%8B%9C%EA%B0%81%ED%99%94.png"></p>
+<hr>
+<h2 id="3-svd의-머신러닝에서의-응용-영상압축">3. SVD의 머신러닝에서의 응용: 영상압축<a hidden class="anchor" aria-hidden="true" href="#3-svd의-머신러닝에서의-응용-영상압축">#</a></h2>
+<p><strong>rank-1 행렬</strong>은 두 벡터의 외적으로 표현된다: $A = uv^T$. 예를 들어 $100 \times 100 = 10000$개 원소를 $2 \times 100 = 200$개로 표현할 수 있어 차원 축소에 활용된다.</p>
+<p><strong>rank-k 근사</strong>: $m \times n$ 행렬 $A$의 SVD가 $A = U\Lambda V^T$이고 $\text{rank}(A) = k$라 하면</p>
+<p>$$A = \sigma_1u_1v_1^T + \sigma_2u_2v_2^T + \cdots + \sigma_ku_kv_k^T$$</p>
+<p>특이값이 빠르게 감소하는 경우, 상위 몇 개($\sigma_1, \sigma_2$)만으로도 원본을 근사할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">svd_approx</span>(A, k):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;상위 k개 특이값만 사용한 rank-k 근사&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    U, S, Vt <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(A, full_matrices<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum(S[i] <span style="color:#f92672">*</span> np<span style="color:#f92672">.</span>outer(U[:, i], Vt[i, :]) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>A_comp <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([[<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>], [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>], [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>], [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3</span>]], dtype<span style="color:#f92672">=</span>float)
+</span></span><span style="display:flex;"><span>U_c, S_c, Vt_c <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(A_comp)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">&#39;σ₁ + σ₂가 전체의&#39;</span>, round((S_c[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">+</span>S_c[<span style="color:#ae81ff">1</span>])<span style="color:#f92672">/</span>S_c<span style="color:#f92672">.</span>sum()<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1</span>), <span style="color:#e6db74">&#39;% 차지&#39;</span>)
+</span></span></code></pre></div><p>4x4 행렬을 rank-1부터 rank-4까지 근사했을 때, 근사에 사용하는 특이값 개수가 늘어날수록 원본에 가까워지고 Frobenius 오차가 줄어든다.</p>
+<p><img alt="rank-k 근사: 특이값 개수에 따른 원본 복원도" loading="lazy" src="/images/svd/03_SVD_%EC%95%95%EC%B6%95_%EC%8B%A4%EC%8A%B5_%ED%96%89%EB%A0%AC%EC%9D%84_rank_k_%EA%B7%BC%EC%82%AC%EB%A1%9C_%EB%B3%B5%EC%9B%90.png"></p>
+<p><strong>실제 영상 압축 예시</strong>: 203×233 크기 흑백영상($\text{rank}=5$)을 5개 특이값만으로 압축하면, 원본 저장 공간 $203\times233=47299$가 $5\times(203+233)=2180$이 되어 <strong>약 21.7배 압축</strong>이 가능하다.</p>
+<p>13×13 픽셀 하트 이미지로 직접 실습해보면, rank 수가 늘어날수록 압축 원소 수는 늘지만 화질이 원본에 가까워지는 트레이드오프를 확인할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>U_h, S_h, Vt_h <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>linalg<span style="color:#f92672">.</span>svd(heart, full_matrices<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]:
+</span></span><span style="display:flex;"><span>    Hk <span style="color:#f92672">=</span> svd_approx(heart, k)
+</span></span><span style="display:flex;"><span>    compressed <span style="color:#f92672">=</span> k <span style="color:#f92672">*</span> (heart<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> heart<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># rank가 커질수록 compressed/원본 크기 비율도 커짐</span>
+</span></span></code></pre></div><p><img alt="SVD 영상 압축: 특이값 수에 따른 화질 변화" loading="lazy" src="/images/svd/04_%EC%8B%A4%EC%A0%9C_%EC%9D%B4%EB%AF%B8%EC%A7%80_SVD_%EC%95%95%EC%B6%95_%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98_%ED%95%98%ED%8A%B8_%EC%9D%B4%EB%AF%B8%EC%A7%80_%EC%9E%AC%ED%98%84.png"></p>
+<p>압축률과 화질(Frobenius 오차, 누적 에너지)의 관계를 그래프로 보면, 적은 수의 특이값만으로도 대부분의 정보(에너지)를 보존할 수 있다는 걸 확인할 수 있다.</p>
+<p><img alt="압축률 vs 화질(누적 에너지) 분석" loading="lazy" src="/images/svd/05_%EC%95%95%EC%B6%95%EB%A5%A0_vs_%ED%99%94%EC%A7%88_PSNR_%EB%B6%84%EC%84%9D.png"></p>
+<hr>
+<h2 id="핵심-요약">핵심 요약<a hidden class="anchor" aria-hidden="true" href="#핵심-요약">#</a></h2>
+<table>
+	<thead>
+			<tr>
+					<th>개념</th>
+					<th>정의</th>
+					<th>핵심 포인트</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>PSDM</td>
+					<td>$x^TAx \geq 0$</td>
+					<td>$A^TA$, $AA^T$는 항상 PSDM</td>
+			</tr>
+			<tr>
+					<td>SVD</td>
+					<td>$A = U\Lambda V^T$</td>
+					<td>모든 $m \times n$ 행렬에 적용 가능</td>
+			</tr>
+			<tr>
+					<td>특이값</td>
+					<td>$\sigma_i = \sqrt{\lambda_i(A^TA)}$</td>
+					<td>$\sigma_1 \geq \sigma_2 \geq \cdots \geq 0$</td>
+			</tr>
+			<tr>
+					<td>V의 열벡터</td>
+					<td>$A^TA$의 고유벡터</td>
+					<td>우 특이벡터</td>
+			</tr>
+			<tr>
+					<td>U의 열벡터</td>
+					<td>$AA^T$의 고유벡터</td>
+					<td>좌 특이벡터</td>
+			</tr>
+			<tr>
+					<td>rank-k 근사</td>
+					<td>$A_k = \sum_{i=1}^k \sigma_iu_iv_i^T$</td>
+					<td>상위 k개 특이값으로 근사</td>
+			</tr>
+			<tr>
+					<td>영상 압축</td>
+					<td>$k(m+n) \ll mn$</td>
+					<td>특이값이 빠르게 감소할수록 효율적</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="머신러닝과의-연결">머신러닝과의 연결<a hidden class="anchor" aria-hidden="true" href="#머신러닝과의-연결">#</a></h3>
+<ul>
+<li><strong>PCA (주성분 분석)</strong>: 공분산 행렬의 SVD → 분산이 큰 방향으로 차원 축소</li>
+<li><strong>잠재 의미 분석 (LSA)</strong>: 텍스트 행렬의 SVD → 문서-단어 관계 분석</li>
+<li><strong>추천 시스템</strong>: 사용자-아이템 행렬의 SVD → 잠재 요인 모델</li>
+<li><strong>이미지 압축</strong>: 픽셀 행렬의 SVD → 상위 특이값만으로 이미지 복원</li>
+<li><strong>노이즈 제거</strong>: 작은 특이값은 노이즈에 해당 → 제거하면 신호 개선</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98/">선형대수</a></li>
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/">머신러닝</a></li>
+      <li><a href="https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/">이어드림스쿨</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="https://yoonseo8000000-alt.github.io/">yoonseo blog</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
