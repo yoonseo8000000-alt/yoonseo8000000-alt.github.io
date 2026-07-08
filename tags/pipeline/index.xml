@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pipeline on yoonseo blog</title>
+    <link>https://yoonseo8000000-alt.github.io/tags/pipeline/</link>
+    <description>Recent content in Pipeline on yoonseo blog</description>
+    <generator>Hugo</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Wed, 08 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://yoonseo8000000-alt.github.io/tags/pipeline/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>분류 모델의 핵심은 모델이 아니라 검증 설계다 - Pipeline과 하이퍼파라미터 튜닝</title>
+      <link>https://yoonseo8000000-alt.github.io/posts/titanic-classification-pipeline-tuning/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/posts/titanic-classification-pipeline-tuning/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Titanic 데이터셋으로 생존 여부(&lt;code&gt;survived&lt;/code&gt;)를 예측하는 이진 분류 모델을 만들었다. 이번 실습(Lv4)의 목표는 &amp;ldquo;더 좋은 모델&amp;quot;을 찾는 게 아니라, &lt;strong&gt;분류 문제에서 데이터 누수 없이 검증을 설계하는 흐름&lt;/strong&gt;을 익히는 것이었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터: &lt;code&gt;seaborn.load_dataset(&#39;titanic&#39;)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;모델: &lt;code&gt;RandomForestClassifier&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;핵심 도구: &lt;code&gt;Pipeline&lt;/code&gt; + &lt;code&gt;ColumnTransformer&lt;/code&gt; + &lt;code&gt;StratifiedKFold&lt;/code&gt; + &lt;code&gt;GridSearchCV&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;참고: 이번 실습에는 시계열(time series) 관련 코드는 포함되어 있지 않다. 순수 정적(static) 분류 문제였다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;problem&#34;&gt;Problem&lt;/h2&gt;
+&lt;p&gt;분류 문제, 특히 Titanic처럼 클래스 비율이 한쪽으로 치우친 데이터(생존 38% vs 사망 62%)에서는 두 가지를 항상 조심해야 한다.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -6,8 +6,43 @@
     <description>Recent content in Tags on yoonseo blog</description>
     <generator>Hugo</generator>
     <language>ko-kr</language>
-    <lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Jul 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://yoonseo8000000-alt.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Classification</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/classification/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/classification/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GridSearchCV</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/gridsearchcv/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/gridsearchcv/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Pipeline</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/pipeline/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/pipeline/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>RandomForest</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/randomforest/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/randomforest/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scikit-Learn</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/scikit-learn/</link>
+      <pubDate>Wed, 08 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/scikit-learn/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Kaggle</title>
       <link>https://yoonseo8000000-alt.github.io/tags/kaggle/</link>
@@ -23,20 +58,6 @@
       <description></description>
     </item>
     <item>
-      <title>Machine-Learning</title>
-      <link>https://yoonseo8000000-alt.github.io/tags/machine-learning/</link>
-      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/tags/machine-learning/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Regression</title>
-      <link>https://yoonseo8000000-alt.github.io/tags/regression/</link>
-      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/tags/regression/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Xgboost</title>
       <link>https://yoonseo8000000-alt.github.io/tags/xgboost/</link>
       <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
@@ -46,8 +67,22 @@
     <item>
       <title>머신러닝</title>
       <link>https://yoonseo8000000-alt.github.io/tags/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/</link>
-      <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://yoonseo8000000-alt.github.io/tags/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>이어드림스쿨</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/</link>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>회귀분석</title>
+      <link>https://yoonseo8000000-alt.github.io/tags/%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D/</link>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>https://yoonseo8000000-alt.github.io/tags/%ED%9A%8C%EA%B7%80%EB%B6%84%EC%84%9D/</guid>
       <description></description>
     </item>
     <item>
@@ -55,13 +90,6 @@
       <link>https://yoonseo8000000-alt.github.io/tags/%EB%AF%B8%EC%A0%81%EB%B6%84/</link>
       <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
       <guid>https://yoonseo8000000-alt.github.io/tags/%EB%AF%B8%EC%A0%81%EB%B6%84/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>이어드림스쿨</title>
-      <link>https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/</link>
-      <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://yoonseo8000000-alt.github.io/tags/%EC%9D%B4%EC%96%B4%EB%93%9C%EB%A6%BC%EC%8A%A4%EC%BF%A8/</guid>
       <description></description>
     </item>
     <item>
